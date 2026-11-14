@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Örnek Spor Kulübü</title>
+<meta name="description" content="Kulübümüzün resmi sitesi: kadro, fikstür, puan durumu, haberler ve üyelik başvurusu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="atla" href="#icerik">İçeriğe geç</a>
+
+<header class="ust">
+  <div class="sar ust-ic">
+    <a class="marka" href="#ana-sayfa">
+      <svg class="arma" viewBox="0 0 48 56" aria-hidden="true">
+        <path class="arma-govde" d="M24 2 44 8v22c0 12-9 20-20 24C13 50 4 42 4 30V8z"/>
+        <path class="arma-serit" d="M4 20h40v8H4z"/>
+        <text id="arma-yazi" x="24" y="44" text-anchor="middle"></text>
+      </svg>
+      <span id="marka-ad"></span>
+    </a>
+    <nav aria-label="Ana menü">
+      <a href="#hakkimizda">Hakkımızda</a>
+      <a href="#fikstur">Fikstür</a>
+      <a href="#kadro">Kadro</a>
+      <a href="#haberler">Haberler</a>
+      <a href="#galeri">Galeri</a>
+      <a href="#iletisim">İletişim</a>
+      <a class="dugme dugme-kucuk" href="#basvuru">Üye ol</a>
+    </nav>
+  </div>
+</header>
+
+<main id="icerik">
+
+  <section class="kapak" id="ana-sayfa">
+    <div class="sar kapak-ic">
+      <div>
+        <p class="ust-yazi" id="kapak-lig"></p>
+        <h1 id="kapak-ad"></h1>
+        <p class="kapak-slogan" id="kapak-slogan"></p>
+        <div class="dugmeler">
+          <a class="dugme dugme-acik" href="#basvuru">Kulübe katıl</a>
+          <a class="dugme dugme-cizgi" href="#fikstur">Maç takvimi</a>
+        </div>
+      </div>
+      <aside class="mac-karti" aria-labelledby="siradaki-baslik">
+        <p class="ust-yazi" id="siradaki-baslik">Sıradaki maç</p>
+        <div id="siradaki"></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="bolum" id="hakkimizda">
+    <div class="sar iki-sutun">
+      <div>
+        <h2>Hakkımızda</h2>
+        <div id="hakkinda-yazi" class="yazi"></div>
+      </div>
+      <dl class="rakamlar" id="rakamlar"></dl>
+    </div>
+  </section>
+
+  <section class="bolum bolum-koyu" id="fikstur">
+    <div class="sar">
+      <h2>Fikstür ve puan durumu</h2>
+      <div class="iki-sutun esit">
+        <div>
+          <h3>Maçlar</h3>
+          <ul class="maclar" id="maclar"></ul>
+        </div>
+        <div>
+          <h3 id="puan-baslik">Puan durumu</h3>
+          <div class="tablo-sar">
+            <table aria-labelledby="puan-baslik">
+              <thead>
+                <tr>
+                  <th scope="col">#</th><th scope="col" class="sol">Takım</th>
+                  <th scope="col"><abbr title="Oynanan">O</abbr></th>
+                  <th scope="col"><abbr title="Galibiyet">G</abbr></th>
+                  <th scope="col"><abbr title="Beraberlik">B</abbr></th>
+                  <th scope="col"><abbr title="Mağlubiyet">M</abbr></th>
+                  <th scope="col"><abbr title="Averaj">AV</abbr></th>
+                  <th scope="col"><abbr title="Puan">P</abbr></th>
+                </tr>
+              </thead>
+              <tbody id="puan-govde"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bolum" id="kadro">
+    <div class="sar">
+      <h2>A takım kadrosu</h2>
+      <p class="alt-not" id="teknik"></p>
+      <div class="kadro" id="kadro-liste"></div>
+    </div>
+  </section>
+
+  <section class="bolum bolum-gri" id="haberler">
+    <div class="sar">
+      <h2>Haberler</h2>
+      <div class="haberler" id="haber-liste"></div>
+    </div>
+  </section>
+
+  <section class="bolum" id="galeri">
+    <div class="sar">
+      <h2>Galeri</h2>
+      <div class="galeri" id="galeri-liste"></div>
+    </div>
+  </section>
+
+  <section class="bolum bolum-gri" id="basvuru">
+    <div class="sar iki-sutun esit">
+      <div>
+        <h2>Üyelik ve kayıt başvurusu</h2>
+        <p class="yazi">Formu doldurun, kulüp sekreterliği üç iş günü içinde sizi arasın. 18 yaşından küçük sporcular için başvuruyu veli yapar.</p>
+        <ul class="madde">
+          <li>Futbol okulu: 2014-2019 doğumlular</li>
+          <li>Altyapı seçmeleri: U13, U15, U17</li>
+          <li>Kulüp üyeliği: 18 yaş ve üzeri</li>
+        </ul>
+      </div>
+      <form id="basvuru-formu" novalidate>
+        <div class="alan">
+          <label for="f-ad">Ad soyad</label>
+          <input id="f-ad" name="ad" type="text" autocomplete="name" required>
+        </div>
+        <div class="alan-cift">
+          <div class="alan">
+            <label for="f-tel">Telefon</label>
+            <input id="f-tel" name="telefon" type="tel" autocomplete="tel" required>
+          </div>
+          <div class="alan">
+            <label for="f-dogum">Sporcunun doğum yılı</label>
+            <input id="f-dogum" name="dogum_yili" type="number" min="1940" max="2022" inputmode="numeric">
+          </div>
+        </div>
+        <div class="alan">
+          <label for="f-eposta">E-posta</label>
+          <input id="f-eposta" name="eposta" type="email" autocomplete="email" required>
+        </div>
+        <div class="alan">
+          <label for="f-tur">Başvuru türü</label>
+          <select id="f-tur" name="tur" required></select>
+        </div>
+        <div class="alan">
+          <label for="f-not">Notunuz (isteğe bağlı)</label>
+          <textarea id="f-not" name="not" rows="3"></textarea>
+        </div>
+        <label class="onay" for="f-onay">
+          <input id="f-onay" name="onay" type="checkbox" required>
+          <span>Bilgilerimin başvurumu değerlendirmek için kullanılmasını kabul ediyorum.</span>
+        </label>
+        <button class="dugme" type="submit" id="f-gonder">Başvuruyu gönder</button>
+        <p class="form-durum" id="form-durum" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="bolum" id="iletisim">
+    <div class="sar">
+      <h2>İletişim</h2>
+      <dl class="iletisim" id="iletisim-liste"></dl>
+    </div>
+  </section>
+
+</main>
+
+<footer class="alt">
+  <div class="sar alt-ic">
+    <span id="alt-yazi"></span>
+    <a href="#ana-sayfa">Başa dön</a>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
