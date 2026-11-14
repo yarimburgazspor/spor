@@ -1,4 +1,4 @@
-# Spor Kulübü Sitesi
+# Yarımburgaz Spor Sitesi
 
 Futbol kulübü için tek sayfalık, statik site. Derleme adımı yok; GitHub Pages üzerinde doğrudan çalışır.
 
@@ -9,16 +9,16 @@ Futbol kulübü için tek sayfalık, statik site. Derleme adımı yok; GitHub Pa
 | `index.html` | Sayfa iskeleti |
 | `js/data.js` | **Tüm içerik burada**: kulüp adı, kadro, fikstür, puan durumu, haberler, galeri, iletişim |
 | `js/main.js` | İçeriği sayfaya yerleştirir, formu yönetir |
-| `css/style.css` | Görünüm. Kulüp renkleri en üstteki `--bordo` ve `--lacivert` değerleridir |
-| `images/` | Galeri fotoğrafları (kendiniz ekleyin) |
+| `css/style.css` | Görünüm. Kulüp renkleri en üstteki `--kirmizi` ve `--sari` değerleridir |
+| `images/` | Kulüp arması (`logo.png`, `favicon.png`) |
 
 ## İçeriği güncelleme
 
-`js/data.js` dosyasını açıp değerleri değiştirin. Dosyadaki tüm adlar ve sonuçlar örnektir.
+`js/data.js` dosyasını açıp değerleri değiştirin. Kulüp adı, kuruluş yılı, renkler ve Instagram adresi gerçektir; haberler, maçlar, kadro, tesis ve iletişim bilgileri örnektir. Gerçek bilgileri girince `ornekIcerik: false` yapın, sayfanın üstündeki uyarı kalkar.
 
 - **Maç sonucu girmek:** ilgili maçın `skor` alanına `"2-1"` yazın (önce kendi golünüz). Boş bırakılan ilk maç "Sıradaki maç" olarak gösterilir.
 - **Puan durumu:** her takımın O/G/B/M/A/Y değerlerini girin; puan ve sıralama otomatik hesaplanır.
-- **Fotoğraf:** dosyayı `images/` klasörüne koyun, `galeri` listesinde `dosya: "images/ad.jpg"` yazın.
+- **Haber eklemek:** `haberler` listesine yeni bir satır ekleyin; en yeni tarihli haber büyük kartta gösterilir.
 - Tarayıcı sekmesindeki ad için `index.html` içindeki `<title>` satırını da güncelleyin.
 
 ## GitHub Pages'te yayınlama
@@ -30,11 +30,11 @@ Futbol kulübü için tek sayfalık, statik site. Derleme adımı yok; GitHub Pa
    git add .
    git commit -m "İlk sürüm"
    git branch -M main
-   git remote add origin https://github.com/KULLANICI/DEPO.git
+   git remote add origin https://github.com/yarimburgazspor/spor.git
    git push -u origin main
    ```
 3. Depoda **Settings → Pages → Build and deployment**: Source olarak **Deploy from a branch**, Branch olarak **main** ve **/ (root)** seçip kaydedin.
-4. Birkaç dakika sonra site `https://KULLANICI.github.io/DEPO/` adresinde açılır.
+4. Birkaç dakika sonra site `https://yarimburgazspor.github.io/spor/` adresinde açılır.
 
 ## Üyelik formu
 
