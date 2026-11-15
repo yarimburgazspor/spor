@@ -213,7 +213,7 @@ window.KULUP = {
     { no: 31, ad: "Olcay Kamacı", mevki: "Ofansif orta saha", ilk11: true, dogumYili: 2010, foto: "" },
     { no: 14, ad: "Arif Hamza Özen", mevki: "Sağ bek", ilk11: true, dogumYili: 2010, foto: "" },
     { no: null, ad: "Kerem Güngör", mevki: "", dogumYili: 2010, foto: "" },
-    { no: null, ad: "Muhammed Ali Çetin", mevki: "", dogumYili: 2010, foto: "" },
+    { no: 27, ad: "Muhammed Ali Çetin", mevki: "", yedek: true, dogumYili: 2010, foto: "" },
     { no: 5, ad: "Berat Yıldız", mevki: "Stoper", ilk11: true, dogumYili: 2010, foto: "" },
     { no: 17, ad: "Çetin Can Uğur", mevki: "", yedek: true, dogumYili: 2010, foto: "" },
     { no: 29, ad: "Muhammed Taha Artuç", mevki: "", yedek: true, dogumYili: 2010, foto: "" },
