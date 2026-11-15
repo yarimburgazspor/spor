@@ -198,13 +198,13 @@ window.KULUP = {
   katilYazi: "Kulübümüzde forma giymek isteyen sporcular ve veliler formu doldurabilir. 18 yaşından küçükler için başvuruyu veli yapar.",
 
   /* Boş bırakılan satırlar sitede gösterilmez. */
-  iletisim: { adres: "Halkalı Etap Stadı, Atakent Mah. 3. Etap 4. Cad. No: 37/A, Küçükçekmece / İstanbul", telefon: "0538 817 78 38", eposta: "", saatler: "" },
+  iletisim: { adres: "Halkalı Etap Stadı, Atakent Mah. 3. Etap 4. Cad. No: 37/A, Küçükçekmece / İstanbul", telefon: "+90 533 349 80 11", eposta: "", saatler: "" },
 
   /* Sayfanın en altındaki tasarım imzası */
   tasarim: {
     onEk: "Website Design by",
     ad: "Yalçın Kır · Yapay Zeka Koçu",
-    url: "https://wa.me/905458506838"
+    url: "https://wa.me/905388177838"
   },
 
   /* BAŞVURU FORMU
@@ -216,6 +216,6 @@ window.KULUP = {
 
   /* WhatsApp numarası (ülke koduyla, başında + ve 0 olmadan). Doluysa başvuru formu
      WhatsApp'ı açar ve bilgileri hazır mesaj olarak yazar; göndermek ziyaretçiye kalır. */
-  whatsapp: "905388177838",
+  whatsapp: "905333498011",
   basvuruTurleri: ["Sporcu başvurusu", "Sponsorluk", "Kulüp üyeliği", "Gönüllü / antrenör"]
 };
