@@ -15,19 +15,9 @@
 
 <a class="atla" href="#icerik">İçeriğe geç</a>
 
-<div class="serit">
-  <div class="sar serit-ic">
-    <span class="serit-etiket" id="serit-etiket"></span>
-    <a id="serit-instagram" href="#instagram" rel="noopener">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1"/></svg>
-      <span id="serit-instagram-ad"></span>
-    </a>
-  </div>
-</div>
-
 <header class="ust">
   <div class="sar ust-ic">
-    <a class="marka" href="#haberler">
+    <a class="marka" href="#icerik">
       <img src="images/logo.png" alt="" width="52" height="55">
       <span>
         <strong id="marka-ad"></strong>
@@ -35,13 +25,13 @@
       </span>
     </a>
     <nav aria-label="Ana menü">
+      <a href="#icerik">Ana sayfa</a>
+      <a href="#maclar-bolum">Puantaj ve fikstür</a>
       <a href="#haberler">Haberler</a>
-      <a href="#mac-takvimi">Maçlar</a>
-      <a href="#puan-durumu">Puan durumu</a>
       <a href="#gol-krali">Gol kralımız</a>
       <a href="#takim">Takımımız</a>
+      <a href="#basvuru">Başvuru</a>
       <a href="#iletisim">İletişim</a>
-      <a class="dugme dugme-sari" href="#basvuru">Başvuru formu</a>
     </nav>
   </div>
 </header>
@@ -54,144 +44,158 @@
 <p class="ornek-uyari" id="ornek-uyari" hidden>Site kurulum aşamasında: bazı bilgiler örnektir.</p>
 
 <main id="icerik">
+  <h1 class="gizli" id="sayfa-baslik"></h1>
 
-  <section class="bolum" id="haberler">
-    <div class="sar">
-      <div class="bolum-bas">
-        <h1>Haberler</h1>
+  <!-- Üst alan: büyük slider + yan sütun -->
+  <section class="sar ust-alan" aria-labelledby="vitrin-baslik">
+    <div class="vitrin" id="vitrin">
+      <div class="vitrin-cerceve" id="vitrin-cerceve"></div>
+      <button type="button" class="vitrin-ok geri" id="vitrin-geri" aria-label="Önceki fotoğraf">&#8249;</button>
+      <button type="button" class="vitrin-ok ileri" id="vitrin-ileri" aria-label="Sonraki fotoğraf">&#8250;</button>
+      <div class="vitrin-alt">
+        <h2 id="vitrin-baslik"></h2>
+        <p id="vitrin-aciklama"></p>
+        <div class="vitrin-noktalar" id="vitrin-noktalar"></div>
       </div>
+    </div>
+    <aside class="yan" aria-label="Öne çıkanlar">
+      <figure class="yan-gorsel" id="yan-gorsel"><img id="yan-resim" alt="" width="466" height="612"></figure>
+      <a class="dugme dugme-genis kaynak-dugme" href="#maclar-bolum" rel="noopener" id="yan-dugme"></a>
+      <div class="sosyal">
+        <a id="yan-instagram" href="#iletisim" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1"/></svg>
+        </a>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Dört kısayol kutusu -->
+  <nav class="sar kutular" aria-label="Kısayollar">
+    <a href="#maclar-bolum">Maç sonuçları ve fikstür</a>
+    <a href="#puan-durumu">Puan durumu</a>
+    <a href="#gol-krali">U17 gol kralımız</a>
+    <a href="#basvuru">Kulübe katıl: başvuru formu</a>
+  </nav>
+
+  <!-- Maçlar + puan durumu -->
+  <section class="sar cift" id="maclar-bolum">
+    <div class="panel">
+      <div class="panel-bas">
+        <h2><span id="lig-baslik"></span><br>Sonuçlar ve fikstür</h2>
+        <a class="dugme-ince kaynak-dugme" href="#maclar-bolum" rel="noopener">Puantaj ve fikstür &raquo;</a>
+      </div>
+      <div class="siradaki" id="siradaki"></div>
+      <ul class="maclar" id="maclar"></ul>
+    </div>
+    <div class="panel" id="puan-durumu">
+      <div class="panel-bas">
+        <h2 id="puan-baslik"></h2>
+        <a class="dugme-ince kaynak-dugme" href="#maclar-bolum" rel="noopener">Puantaj ve fikstür &raquo;</a>
+      </div>
+      <p class="grup-adi" id="puan-alt"></p>
+      <div class="tablo-sar">
+        <table aria-labelledby="puan-baslik">
+          <thead>
+            <tr>
+              <th scope="col" class="sol" colspan="2">Takım</th>
+              <th scope="col"><abbr title="Oynanan">O</abbr></th>
+              <th scope="col"><abbr title="Galibiyet">G</abbr></th>
+              <th scope="col"><abbr title="Beraberlik">B</abbr></th>
+              <th scope="col"><abbr title="Mağlubiyet">M</abbr></th>
+              <th scope="col"><abbr title="Puan">P</abbr></th>
+            </tr>
+          </thead>
+          <tbody id="puan-govde"></tbody>
+        </table>
+      </div>
+      <p class="kaynak" id="kaynak-not"></p>
+    </div>
+  </section>
+
+  <!-- Haberler -->
+  <section class="sar bolum" id="haberler">
+    <div class="panel">
+      <div class="panel-bas"><h2>Haberler</h2></div>
       <div class="haberler" id="haber-liste"></div>
     </div>
   </section>
 
-  <section class="vitrin" id="vitrin" aria-labelledby="vitrin-baslik">
-    <div class="sar vitrin-ic">
-      <div class="vitrin-yazi">
-        <h2 id="vitrin-baslik"></h2>
-        <p id="vitrin-aciklama"></p>
-        <div class="vitrin-kontrol">
-          <button type="button" id="vitrin-geri" aria-label="Önceki fotoğraf">&#8592;</button>
-          <span id="vitrin-sayi" aria-live="polite"></span>
-          <button type="button" id="vitrin-ileri" aria-label="Sonraki fotoğraf">&#8594;</button>
-        </div>
-      </div>
-      <div class="vitrin-cerceve" id="vitrin-cerceve"></div>
-    </div>
-  </section>
-
-  <section class="bolum bolum-koyu" id="mac-takvimi">
-    <div class="sar">
-      <div class="bolum-bas">
-        <h2 id="lig-baslik">Maçlar</h2>
-        <a class="dugme dugme-cizgi" id="kaynak-dugme" href="#mac-takvimi" rel="noopener">Puantaj ve fikstür</a>
-      </div>
-      <div class="siradaki" id="siradaki"></div>
-      <div class="mac-puan">
+  <!-- Gol kralı -->
+  <section class="sar bolum" id="gol-krali" aria-labelledby="gk-baslik">
+    <div class="panel">
+      <div class="panel-bas"><h2 id="gk-baslik"></h2></div>
+      <div class="gk-ic">
+        <img id="gk-resim" class="gk-resim" alt="" width="1000" height="1093" loading="lazy">
         <div>
-          <h3>Sonuçlar ve fikstür</h3>
-          <ul class="maclar" id="maclar"></ul>
-        </div>
-        <div id="puan-durumu">
-          <h3 id="puan-baslik">Puan durumu</h3>
-          <p class="puan-alt" id="puan-alt"></p>
-          <div class="tablo-sar">
-            <table aria-labelledby="puan-baslik">
-              <thead>
-                <tr>
-                  <th scope="col">#</th><th scope="col" class="sol">Takım</th>
-                  <th scope="col"><abbr title="Oynanan">O</abbr></th>
-                  <th scope="col"><abbr title="Galibiyet">G</abbr></th>
-                  <th scope="col"><abbr title="Beraberlik">B</abbr></th>
-                  <th scope="col"><abbr title="Mağlubiyet">M</abbr></th>
-                  <th scope="col"><abbr title="Puan">P</abbr></th>
-                </tr>
-              </thead>
-              <tbody id="puan-govde"></tbody>
-            </table>
-          </div>
-          <p class="kaynak" id="kaynak-not"></p>
+          <p class="gk-ad"><span id="gk-forma"></span><strong id="gk-ad"></strong></p>
+          <p class="gk-unvan" id="gk-unvan"></p>
+          <dl class="gk-rakamlar" id="gk-rakamlar"></dl>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="bolum bolum-gri" id="gol-krali" aria-labelledby="gk-baslik">
-    <div class="sar gk-ic">
-      <img id="gk-resim" class="gk-resim" alt="" width="1000" height="1093">
-      <div>
-        <h2 id="gk-baslik"></h2>
-        <p class="gk-ad"><span id="gk-forma"></span><strong id="gk-ad"></strong></p>
-        <p class="gk-unvan" id="gk-unvan"></p>
-        <dl class="gk-rakamlar" id="gk-rakamlar"></dl>
-      </div>
-    </div>
-  </section>
-
-  <section class="bolum" id="takim">
-    <div class="sar">
-      <h2>Takımımız</h2>
-      <div class="takim-ozet" id="takim-ozet"></div>
-      <div id="kadro-bolum" hidden>
-        <h3 class="alt-baslik">Kadro <span id="teknik"></span></h3>
-        <div class="kadro" id="kadro-liste"></div>
-      </div>
-      <h3 class="alt-baslik">Sahamız</h3>
-      <div class="kartlar iki" id="saha-liste"></div>
-    </div>
-  </section>
-
-  <section class="bolum bolum-gri bolum-cizgi" id="katil">
-    <div class="sar iki-sutun">
-      <div>
-        <h2>Kulübe katıl</h2>
-        <p class="yazi" id="katil-yazi"></p>
-        <dl class="kunye" id="kunye"></dl>
-      </div>
-      <form id="basvuru" novalidate>
-        <h3 id="basvuru-baslik">Başvuru formu</h3>
-        <div class="alan">
-          <label for="f-ad">Ad soyad</label>
-          <input id="f-ad" name="ad" type="text" autocomplete="name" required>
+  <!-- Takımımız -->
+  <section class="sar bolum" id="takim">
+    <div class="panel">
+      <div class="panel-bas"><h2>Takımımız</h2></div>
+      <div class="panel-ic">
+        <div class="takim-ozet" id="takim-ozet"></div>
+        <div id="kadro-bolum" hidden>
+          <h3 class="alt-baslik">Kadro <span id="teknik"></span></h3>
+          <div class="kadro" id="kadro-liste"></div>
         </div>
-        <div class="alan-cift">
+        <h3 class="alt-baslik">Sahamız</h3>
+        <div class="sahalar" id="saha-liste"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kulübe katıl -->
+  <section class="sar bolum" id="katil">
+    <div class="panel">
+      <div class="panel-bas"><h2>Kulübe katıl</h2></div>
+      <div class="panel-ic iki-sutun">
+        <div>
+          <p class="yazi" id="katil-yazi"></p>
+          <dl class="kunye" id="kunye"></dl>
+        </div>
+        <form id="basvuru" novalidate>
+          <h3 id="basvuru-baslik">Başvuru formu</h3>
           <div class="alan">
-            <label for="f-tel">Telefon</label>
-            <input id="f-tel" name="telefon" type="tel" autocomplete="tel" required>
+            <label for="f-ad">Ad soyad</label>
+            <input id="f-ad" name="ad" type="text" autocomplete="name" required>
+          </div>
+          <div class="alan-cift">
+            <div class="alan">
+              <label for="f-tel">Telefon</label>
+              <input id="f-tel" name="telefon" type="tel" autocomplete="tel" required>
+            </div>
+            <div class="alan">
+              <label for="f-dogum">Sporcunun doğum yılı</label>
+              <input id="f-dogum" name="dogum_yili" type="number" min="1940" max="2022" inputmode="numeric">
+            </div>
           </div>
           <div class="alan">
-            <label for="f-dogum">Sporcunun doğum yılı</label>
-            <input id="f-dogum" name="dogum_yili" type="number" min="1940" max="2022" inputmode="numeric">
+            <label for="f-eposta">E-posta</label>
+            <input id="f-eposta" name="eposta" type="email" autocomplete="email" required>
           </div>
-        </div>
-        <div class="alan">
-          <label for="f-eposta">E-posta</label>
-          <input id="f-eposta" name="eposta" type="email" autocomplete="email" required>
-        </div>
-        <div class="alan">
-          <label for="f-tur">Başvuru türü</label>
-          <select id="f-tur" name="tur" required></select>
-        </div>
-        <div class="alan">
-          <label for="f-not">Notunuz (isteğe bağlı)</label>
-          <textarea id="f-not" name="not" rows="3"></textarea>
-        </div>
-        <label class="onay" for="f-onay">
-          <input id="f-onay" name="onay" type="checkbox" required>
-          <span>Bilgilerimin başvurumu değerlendirmek için kullanılmasını kabul ediyorum.</span>
-        </label>
-        <button class="dugme" type="submit" id="f-gonder">Başvuruyu gönder</button>
-        <p class="form-durum" id="form-durum" role="status" aria-live="polite"></p>
-      </form>
-    </div>
-  </section>
-
-  <section class="instagram" id="instagram">
-    <div class="sar instagram-ic">
-      <div>
-        <h2>Bizi Instagram'da izleyin</h2>
-        <p>Maç fotoğrafları ve duyurular önce orada paylaşılır.</p>
+          <div class="alan">
+            <label for="f-tur">Başvuru türü</label>
+            <select id="f-tur" name="tur" required></select>
+          </div>
+          <div class="alan">
+            <label for="f-not">Notunuz (isteğe bağlı)</label>
+            <textarea id="f-not" name="not" rows="3"></textarea>
+          </div>
+          <label class="onay" for="f-onay">
+            <input id="f-onay" name="onay" type="checkbox" required>
+            <span>Bilgilerimin başvurumu değerlendirmek için kullanılmasını kabul ediyorum.</span>
+          </label>
+          <button class="dugme" type="submit" id="f-gonder">Başvuruyu gönder</button>
+          <p class="form-durum" id="form-durum" role="status" aria-live="polite"></p>
+        </form>
       </div>
-      <a class="dugme dugme-koyu" id="instagram-dugme" href="#instagram" rel="noopener"></a>
     </div>
   </section>
 
@@ -200,17 +204,16 @@
 <footer class="alt" id="iletisim">
   <div class="sar alt-ic">
     <div class="alt-marka">
-      <img src="images/logo.png" alt="" width="84" height="89">
+      <img src="images/logo.png" alt="" width="84" height="89" loading="lazy">
       <p id="alt-ad"></p>
     </div>
     <div>
       <h3>Hızlı erişim</h3>
       <ul>
-        <li><a href="#haberler">Haberler</a></li>
-        <li><a href="#mac-takvimi">Maçlar</a></li>
+        <li><a href="#maclar-bolum">Puantaj ve fikstür</a></li>
         <li><a href="#puan-durumu">Puan durumu</a></li>
+        <li><a href="#haberler">Haberler</a></li>
         <li><a href="#gol-krali">Gol kralımız</a></li>
-        <li><a href="#takim">Takımımız</a></li>
         <li><a href="#basvuru">Başvuru formu</a></li>
       </ul>
     </div>

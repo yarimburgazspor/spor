@@ -35,10 +35,17 @@ window.KULUP = {
     baslik: "ŞAMPİYONLUK MEŞALESİ YANDI!",
     yazi: "Grubun iddialı ekiplerinden Ferahevler'i 6-1 yendik. Altı maçta altı galibiyetle 7. Grup'un zirvesindeyiz.",
     resimler: [
-      { dosya: "images/sampiyonluk-1-takim.jpg", aciklama: "Maç öncesi takım fotoğrafı, İFA Spor Stadyumu" },
-      { dosya: "images/sampiyonluk-2-soyunma-odasi.jpg", aciklama: "Maç sonrası soyunma odasında galibiyet sevinci" },
-      { dosya: "images/sampiyonluk-3-kenar.jpg", aciklama: "Kenarda maçı izleyen antrenörümüz" }
+      /* odak: geniş çerçevede fotoğrafın hangi bölümünün görüneceği (yatay dikey) */
+      { dosya: "images/sampiyonluk-1-takim.jpg", aciklama: "Maç öncesi takım fotoğrafı, İFA Spor Stadyumu", odak: "50% 62%" },
+      { dosya: "images/sampiyonluk-2-soyunma-odasi.jpg", aciklama: "Maç sonrası soyunma odasında galibiyet sevinci", odak: "50% 66%" },
+      { dosya: "images/sampiyonluk-3-kenar.jpg", aciklama: "Kenarda maçı izleyen antrenörümüz", odak: "50% 40%" }
     ]
+  },
+
+  /* Slider'ın sağındaki görsel. dosya boş bırakılırsa gösterilmez. */
+  yanResim: {
+    dosya: "images/yan-gorsel.jpg",
+    aciklama: "Atatürk portresi ve sözü: Ben sporcunun zeki, çevik ve aynı zamanda ahlaklısını severim."
   },
 
   /* Gol kralı bölümü. Rakamlar değişince yalnızca "rakamlar" satırlarını güncelleyin. */
