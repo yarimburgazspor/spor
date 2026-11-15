@@ -221,6 +221,14 @@
     $("yan-gorsel").hidden = true;
   }
 
+  /* Başkan görseli */
+  if (K.baskan) {
+    $("yan-baskan").hidden = false;
+    $("baskan-baslik").textContent = K.baskan.baslik;
+    $("baskan-ad").textContent = K.baskan.ad;
+    $("baskan-resim").src = K.baskan.resim; $("baskan-resim").alt = K.baskan.resimAciklama;
+  }
+
   /* Gol kralı */
   (function () {
     var G = K.golKrali;

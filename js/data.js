@@ -49,7 +49,7 @@ window.KULUP = {
     yazi: "Grubun iddialı ekiplerinden Ferahevler'i 6-1 yendik. Altı maçta altı galibiyetle 7. Grup'un zirvesindeyiz.",
     resimler: [
       /* odak: geniş çerçevede fotoğrafın hangi bölümünün görüneceği (yatay dikey) */
-      { dosya: "images/sampiyonluk-1-takim.jpg", aciklama: "Maç öncesi takım fotoğrafı, İFA Spor Stadyumu", odak: "50% 62%" },
+      { dosya: "images/sampiyonluk-1-takim.jpg", aciklama: "Maç öncesi takım fotoğrafı, İFA Spor Stadyumu", odak: "50% 70%" },
       { dosya: "images/sampiyonluk-2-soyunma-odasi.jpg", aciklama: "Maç sonrası soyunma odasında galibiyet sevinci", odak: "50% 66%" },
       { dosya: "images/sampiyonluk-3-kenar.jpg", aciklama: "Kenarda maçı izleyen antrenörümüz", odak: "50% 40%" }
     ]
@@ -59,6 +59,14 @@ window.KULUP = {
   yanResim: {
     dosya: "images/yan-gorsel.jpg",
     aciklama: "Atatürk portresi ve sözü: Ben sporcunun zeki, çevik ve aynı zamanda ahlaklısını severim."
+  },
+
+  /* Yan sütunda, portrenin altındaki başkan görseli. Bloğu silerseniz gösterilmez. */
+  baskan: {
+    baslik: "Başkanımız",
+    ad: "Recai Şaz",
+    resim: "images/baskan.jpg",
+    resimAciklama: "Yarımburgaz Spor Kulübü Başkanı Recai Şaz, makamında"
   },
 
   /* Gol kralı bölümü. Rakamlar değişince yalnızca "rakamlar" satırlarını güncelleyin. */
