@@ -4,7 +4,7 @@
   burada değiştirmeniz yeterli; HTML'e dokunmanız gerekmez.
 
   Maç ve puan durumu verileri TFF İstanbul sayfasından (ligKaynak.url) elle
-  aktarılır. Son aktarım: 15 Kasım 2026 (6. hafta puan durumu).
+  aktarılır. Son aktarım: 15 Kasım 2026 (6. hafta puan durumu). 6. hafta Ferahevler sonucu kulüp paylaşımından eklendi.
 */
 window.KULUP = {
   /* true yapılırsa sayfanın üstünde "bilgiler örnektir" uyarısı çıkar */
@@ -29,11 +29,26 @@ window.KULUP = {
     url: "https://tffistanbul.org/kulup/oz-yarimburgaz-spor/1417/2026-2027/30/u17-b-ligi/178#group"
   },
 
+  /* Sayfanın ortasındaki fotoğraf slider'ı. Yeni fotoğraf için dosyayı images/
+     klasörüne koyup listeye bir satır ekleyin. */
+  slider: {
+    baslik: "ŞAMPİYONLUK MEŞALESİ YANDI!",
+    yazi: "Grubun iddialı ekiplerinden Ferahevler'i 6-1 yendik. Altı maçta altı galibiyetle 7. Grup'un zirvesindeyiz.",
+    resimler: [
+      { dosya: "images/sampiyonluk-1-takim.jpg", aciklama: "Maç öncesi takım fotoğrafı, İFA Spor Stadyumu" },
+      { dosya: "images/sampiyonluk-2-soyunma-odasi.jpg", aciklama: "Maç sonrası soyunma odasında galibiyet sevinci" },
+      { dosya: "images/sampiyonluk-3-kenar.jpg", aciklama: "Kenarda maçı izleyen antrenörümüz" }
+    ]
+  },
+
   /* kategori: "u17" veya "kulup" (haber filtreleri bunu kullanır) */
   haberler: [
+    { tarih: "2026-11-14", kategori: "u17", etiket: "#U17",
+      baslik: "Şampiyonluk meşalesi yandı: Ferahevler'e 6-1",
+      ozet: "Grubun iddialı ekiplerinden Ferahevler'i İFA Sahası'nda 6-1 yendik. Altıda altı yaptık; 18 puanla 7. Grup'un lideriyiz." },
     { tarih: "2026-11-08", kategori: "u17", etiket: "#U17",
       baslik: "Beşte beş: 7. Grup'ta liderlik bizde",
-      ozet: "U17 takımımız ilk beş maçını da kazandı. 15 puanla grubun zirvesindeyiz; 17 gol attık, 6 gol yedik." },
+      ozet: "U17 takımımız ilk beş maçını da kazandı ve 15 puanla grubun zirvesine yerleşti." },
     { tarih: "2026-11-08", kategori: "u17", etiket: "#U17",
       baslik: "Denizköşkler karşısında 4-1",
       ozet: "5. hafta maçında Denizköşkler Mahallesispor'u İBB 100. Yıl Stadı'nda üç farkla geçtik." },
@@ -57,17 +72,18 @@ window.KULUP = {
       saha: "Esenyurt Turgut Özal Stadı" },
     { hafta: 5, tarih: "2026-11-08", saat: "16:15", ev: "Öz Yarımburgaz Spor", konuk: "Denizköşkler Mahallesispor", skor: "4-1",
       saha: "İBB 100. Yıl Stadı - Küçükçekmece (Halkalı Etap)" },
-    { hafta: 6, tarih: "2026-11-14", saat: "14:30", ev: "Öz Yarımburgaz Spor", konuk: "Ferahevler", skor: "",
+    { hafta: 6, tarih: "2026-11-14", saat: "14:30", ev: "Öz Yarımburgaz Spor", konuk: "Ferahevler", skor: "6-1",
       saha: "İFA Sahası" }
   ],
 
   /* G: galibiyet, B: beraberlik, M: mağlubiyet. Oynanan maç ve puan otomatik hesaplanır. */
   puanHaftasi: 6,
   puanDurumu: [
-    { takim: "Öz Yarımburgaz Spor", G: 5, B: 0, M: 0 },
+    /* 6. hafta Ferahevler maçı (6-1) kulübün paylaşımından işlendi; iki takımın satırı buna göre güncel */
+    { takim: "Öz Yarımburgaz Spor", G: 6, B: 0, M: 0 },
     { takim: "Denizköşkler Mahallesispor", G: 3, B: 2, M: 1 },
     { takim: "Nurtepe Spor", G: 3, B: 1, M: 1 },
-    { takim: "Ferahevler", G: 3, B: 1, M: 1 },
+    { takim: "Ferahevler", G: 3, B: 1, M: 2 },
     { takim: "Aksaray", G: 3, B: 0, M: 3 },
     { takim: "İstanbul Bahçelievler Spor Kulübü", G: 2, B: 0, M: 4 },
     { takim: "Araphan Spor", G: 1, B: 0, M: 4 },

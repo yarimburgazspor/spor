@@ -49,6 +49,46 @@
       $("haber-liste").appendChild(a);
     });
 
+  /* Fotoğraf slider'ı: 5 saniyede bir geçer; oklar, klavye ve kaydırma ile de değişir */
+  (function () {
+    var S = K.slider, bolum = $("vitrin");
+    if (!S || !S.resimler.length) { bolum.hidden = true; return; }
+    $("vitrin-baslik").textContent = S.baslik;
+    $("vitrin-aciklama").textContent = S.yazi;
+    var cerceve = $("vitrin-cerceve"), kareler = [], aktif = 0, zamanlayici = null;
+    S.resimler.forEach(function (r, i) {
+      var f = el("figure", i === 0 ? "aktif" : "");
+      var img = el("img"); img.src = r.dosya; img.alt = r.aciklama;
+      if (i > 0) img.loading = "lazy";
+      f.appendChild(img); f.appendChild(el("figcaption", "", r.aciklama));
+      cerceve.appendChild(f); kareler.push(f);
+    });
+    function goster(n) {
+      aktif = (n + kareler.length) % kareler.length;
+      kareler.forEach(function (f, i) { f.className = i === aktif ? "aktif" : ""; });
+      $("vitrin-sayi").textContent = (aktif + 1) + " / " + kareler.length;
+    }
+    function durdur() { clearInterval(zamanlayici); zamanlayici = null; }
+    function baslat() {
+      if (zamanlayici || kareler.length < 2) return;
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      zamanlayici = setInterval(function () { goster(aktif + 1); }, 5000);
+    }
+    $("vitrin-geri").addEventListener("click", function () { durdur(); goster(aktif - 1); });
+    $("vitrin-ileri").addEventListener("click", function () { durdur(); goster(aktif + 1); });
+    bolum.addEventListener("mouseenter", durdur);
+    bolum.addEventListener("mouseleave", baslat);
+    bolum.addEventListener("focusin", durdur);
+    var basX = null;
+    cerceve.addEventListener("touchstart", function (e) { basX = e.touches[0].clientX; }, { passive: true });
+    cerceve.addEventListener("touchend", function (e) {
+      if (basX === null) return;
+      var fark = e.changedTouches[0].clientX - basX; basX = null;
+      if (Math.abs(fark) > 40) { durdur(); goster(aktif + (fark < 0 ? 1 : -1)); }
+    });
+    goster(0); baslat();
+  })();
+
   /* Maçlar */
   $("lig-baslik").textContent = K.lig + " · " + K.grup;
   disBaglanti($("kaynak-dugme"), K.ligKaynak.url);
