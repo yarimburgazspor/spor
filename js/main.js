@@ -14,6 +14,8 @@
     return new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]), Number(s[0]), Number(s[1]));
   }
   function tarihYaz(iso, secenek) { return tarihNesnesi(iso).toLocaleDateString("tr-TR", secenek); }
+  function disBaglanti(a, adres) { a.href = adres; a.target = "_blank"; a.rel = "noopener"; }
+  function bizMi(ad) { return ad === K.takimAdi; }
 
   /* Başlık, şerit, alt bilgi */
   document.title = K.kisaAd;
@@ -23,22 +25,18 @@
   $("alt-ad").textContent = K.ad + ", " + K.kurulus + " yılında kuruldu. Renkleri " + K.renkler.toLowerCase().replace(" - ", "-") + ".";
   $("alt-yazi").textContent = "© " + new Date().getFullYear() + " " + K.ad;
   $("ornek-uyari").hidden = !K.ornekIcerik;
-  ["serit-instagram", "instagram-dugme"].forEach(function (id) {
-    $(id).href = K.instagram; $(id).target = "_blank";
-  });
+  disBaglanti($("serit-instagram"), K.instagram);
+  disBaglanti($("instagram-dugme"), K.instagram);
   $("serit-instagram-ad").textContent = K.instagramAd;
   $("instagram-dugme").textContent = K.instagramAd + " hesabını aç";
 
-  /* Haberler: en yenisi büyük kart olur, sekmeler kategoriye göre süzer */
-  function haberleriCiz(kategori) {
-    var liste = $("haber-liste");
-    liste.textContent = "";
-    var secili = K.haberler
-      .filter(function (h) { return kategori === "tumu" || h.kategori === kategori; })
-      .sort(function (a, b) { return a.tarih < b.tarih ? 1 : -1; });
-    if (!secili.length) { liste.appendChild(el("p", "bos", "Bu başlıkta henüz haber yok.")); return; }
-    secili.forEach(function (h, i) {
-      var a = el("article", "haber" + (i === 0 ? " buyuk" : ""));
+  /* Haberler: en yenisi büyük kart olur */
+  K.haberler
+    .map(function (h, i) { return { h: h, i: i }; })
+    .sort(function (a, b) { return a.h.tarih === b.h.tarih ? a.i - b.i : (a.h.tarih < b.h.tarih ? 1 : -1); })
+    .forEach(function (kayit, sira) {
+      var h = kayit.h;
+      var a = el("article", "haber" + (sira === 0 ? " buyuk" : ""));
       a.appendChild(el("div", "haber-ust"));
       var ic = el("div", "haber-ic");
       var satir = el("div", "kunye-satir");
@@ -48,137 +46,152 @@
       satir.appendChild(t);
       ic.appendChild(satir); ic.appendChild(el("h3", "", h.baslik)); ic.appendChild(el("p", "", h.ozet));
       a.appendChild(ic);
-      liste.appendChild(a);
+      $("haber-liste").appendChild(a);
     });
-  }
-  var sekmeler = document.querySelectorAll(".sekmeler button");
-  Array.prototype.forEach.call(sekmeler, function (b) {
-    b.addEventListener("click", function () {
-      Array.prototype.forEach.call(sekmeler, function (d) { d.setAttribute("aria-pressed", d === b ? "true" : "false"); });
-      haberleriCiz(b.getAttribute("data-kategori"));
-    });
-  });
-  haberleriCiz("tumu");
 
-  /* Maç takvimi */
-  function sonucSinifi(m) {
+  /* Maçlar */
+  $("lig-baslik").textContent = K.lig + " · " + K.grup;
+  disBaglanti($("kaynak-dugme"), K.ligKaynak.url);
+  $("kaynak-dugme").textContent = "Puantaj ve fikstür (" + K.ligKaynak.ad + ")";
+
+  function sonucumuz(m) {
     var s = m.skor.split("-").map(Number);
-    return s[0] > s[1] ? "g" : s[0] === s[1] ? "b" : "m";
+    var biz = bizMi(m.ev) ? s[0] : s[1], rakip = bizMi(m.ev) ? s[1] : s[0];
+    return biz > rakip ? "g" : biz === rakip ? "b" : "m";
   }
-  var siradaki = K.fikstur.filter(function (m) { return !m.skor; })[0];
+  var sonucAdi = { g: "galibiyet", b: "beraberlik", m: "mağlubiyet" };
+  var maclar = K.fikstur.slice().sort(function (a, b) { return a.hafta - b.hafta; });
+  var siradaki = maclar.filter(function (m) { return !m.skor; })[0];
 
-  K.fikstur.forEach(function (m) {
-    var li = el("li", m === siradaki ? "sirada" : "");
-    var gun = el("span", "gun");
-    gun.appendChild(document.createTextNode(tarihYaz(m.tarih, { day: "numeric", month: "short" })));
-    gun.appendChild(el("br"));
-    gun.appendChild(document.createTextNode(m.saat));
-    var rakip = el("span", "rakip", m.rakip);
-    rakip.appendChild(el("span", "ic-dis", m.ev ? "İç saha" : "Deplasman"));
-    var sonuc = m.skor
-      ? el("span", "sonuc " + sonucSinifi(m), m.skor)
-      : el("span", "sonuc bekliyor", m === siradaki ? "Sıradaki" : "Oynanacak");
-    if (m.skor) sonuc.setAttribute("aria-label", "Sonuç " + m.skor + ({ g: ", galibiyet", b: ", beraberlik", m: ", mağlubiyet" })[sonucSinifi(m)]);
-    li.appendChild(gun); li.appendChild(rakip); li.appendChild(sonuc);
+  maclar.forEach(function (m) {
+    var li = el("li", "mac" + (m === siradaki ? " sirada" : ""));
+    li.appendChild(el("div", "mac-ust", m.hafta + ". hafta · " + tarihYaz(m.tarih, { day: "numeric", month: "long", year: "numeric", weekday: "long" })));
+    var orta = el("div", "mac-orta");
+    orta.appendChild(el("span", "ev" + (bizMi(m.ev) ? " biz" : ""), m.ev));
+    var skor;
+    if (m.skor) {
+      var sinif = sonucumuz(m);
+      skor = el("span", "skor " + sinif, m.skor.replace("-", " - "));
+      skor.setAttribute("aria-label", m.skor.replace("-", " - ") + ", " + sonucAdi[sinif]);
+    } else {
+      skor = el("span", "skor yok", "-");
+      skor.setAttribute("aria-label", "Sonuç girilmedi");
+    }
+    orta.appendChild(skor);
+    orta.appendChild(el("span", "konuk" + (bizMi(m.konuk) ? " biz" : ""), m.konuk));
+    li.appendChild(orta);
+    li.appendChild(el("div", "mac-alt", m.saha + " · " + m.saat));
     $("maclar").appendChild(li);
   });
 
+  /* Sıradaki maç kutusu: maç saati geçtiyse geri sayım yerine "sonuç bekleniyor" yazar */
   var kutu = $("siradaki");
   if (siradaki) {
-    var evSahibi = siradaki.ev ? K.kisaAd : siradaki.rakip;
-    var konuk = siradaki.ev ? siradaki.rakip : K.kisaAd;
-    var sol = el("div", "takim"); sol.appendChild(el("small", "", "EV SAHİBİ")); sol.appendChild(document.createTextNode(evSahibi));
-    var sag = el("div", "takim sag"); sag.appendChild(el("small", "", "KONUK")); sag.appendChild(document.createTextNode(konuk));
-    var orta = el("div", "orta");
-    orta.appendChild(el("p", "ne-zaman", tarihYaz(siradaki.tarih, { weekday: "long", day: "numeric", month: "long" }) + " · " + siradaki.saat));
-    var sayac = el("dl", "sayac");
-    var parcalar = {};
-    [["gun", "Gün"], ["saat", "Saat"], ["dakika", "Dakika"]].forEach(function (p) {
-      var d = el("div"); d.appendChild(el("dt", "", p[1]));
-      parcalar[p[0]] = el("dd", "", "0"); d.appendChild(parcalar[p[0]]);
-      sayac.appendChild(d);
-    });
-    orta.appendChild(sayac);
-    orta.appendChild(el("p", "yer", siradaki.ev ? K.stat : "Deplasman"));
-    kutu.appendChild(sol); kutu.appendChild(orta); kutu.appendChild(sag);
-
+    var sol = el("div", "takim"); sol.appendChild(el("small", "", "EV SAHİBİ")); sol.appendChild(document.createTextNode(siradaki.ev));
+    var sag = el("div", "takim sag"); sag.appendChild(el("small", "", "KONUK")); sag.appendChild(document.createTextNode(siradaki.konuk));
+    var orta2 = el("div", "orta");
+    orta2.appendChild(el("p", "ne-zaman", siradaki.hafta + ". hafta · " + tarihYaz(siradaki.tarih, { weekday: "long", day: "numeric", month: "long" }) + " · " + siradaki.saat));
     var hedef = tarihNesnesi(siradaki.tarih, siradaki.saat).getTime();
-    var say = function () {
-      var kalan = Math.max(0, hedef - Date.now());
-      parcalar.gun.textContent = Math.floor(kalan / 864e5);
-      parcalar.saat.textContent = Math.floor(kalan % 864e5 / 36e5);
-      parcalar.dakika.textContent = Math.floor(kalan % 36e5 / 6e4);
-    };
-    say(); setInterval(say, 30000);
+    if (hedef > Date.now()) {
+      var sayac = el("dl", "sayac"), parcalar = {};
+      [["gun", "Gün"], ["saat", "Saat"], ["dakika", "Dakika"]].forEach(function (p) {
+        var d = el("div"); d.appendChild(el("dt", "", p[1]));
+        parcalar[p[0]] = el("dd", "", "0"); d.appendChild(parcalar[p[0]]);
+        sayac.appendChild(d);
+      });
+      orta2.appendChild(sayac);
+      var say = function () {
+        var kalan = Math.max(0, hedef - Date.now());
+        parcalar.gun.textContent = Math.floor(kalan / 864e5);
+        parcalar.saat.textContent = Math.floor(kalan % 864e5 / 36e5);
+        parcalar.dakika.textContent = Math.floor(kalan % 36e5 / 6e4);
+      };
+      say(); setInterval(say, 30000);
+    } else {
+      orta2.appendChild(el("p", "bekleniyor", "Sonuç bekleniyor"));
+    }
+    orta2.appendChild(el("p", "yer", siradaki.saha));
+    kutu.appendChild(sol); kutu.appendChild(orta2); kutu.appendChild(sag);
   } else {
-    kutu.style.display = "block";
-    kutu.appendChild(el("p", "ne-zaman", "Yeni maç takvimi açıklandığında burada yer alacak."));
+    kutu.hidden = true;
   }
 
-  /* Puan durumu: puana, sonra averaja, sonra atılan gole göre sıralanır */
-  K.puanDurumu
-    .map(function (t) { return Object.assign({}, t, { P: t.G * 3 + t.B, AV: t.A - t.Y }); })
-    .sort(function (a, b) { return b.P - a.P || b.AV - a.AV || b.A - a.A; })
-    .forEach(function (t, i) {
-      var tr = el("tr", t.biz ? "biz" : "");
-      [i + 1, t.takim, t.O, t.G, t.B, t.M, (t.AV > 0 ? "+" : "") + t.AV, t.P].forEach(function (v) {
-        tr.appendChild(el("td", "", String(v)));
+  /* Puan durumu: puana göre sıralanır, eşitlikte dosyadaki sıra korunur */
+  var tablo = K.puanDurumu
+    .map(function (t, i) { return { takim: t.takim, G: t.G, B: t.B, M: t.M, O: t.G + t.B + t.M, P: t.G * 3 + t.B, i: i }; })
+    .sort(function (a, b) { return b.P - a.P || a.i - b.i; });
+  tablo.forEach(function (t, i) {
+    var tr = el("tr", bizMi(t.takim) ? "biz" : "");
+    [i + 1, t.takim, t.O, t.G, t.B, t.M, t.P].forEach(function (v) { tr.appendChild(el("td", "", String(v))); });
+    $("puan-govde").appendChild(tr);
+  });
+  $("puan-alt").textContent = K.grup + " · " + K.puanHaftasi + ". hafta";
+  var kaynak = $("kaynak-not");
+  kaynak.appendChild(document.createTextNode("Kaynak: "));
+  var ka = el("a", "", K.ligKaynak.ad); disBaglanti(ka, K.ligKaynak.url);
+  kaynak.appendChild(ka);
+
+  /* Takım özeti: tablodaki kendi satırımızdan hesaplanır */
+  var biz = tablo.filter(function (t) { return bizMi(t.takim); })[0];
+  var sira = tablo.indexOf(biz) + 1;
+  var gol = maclar.filter(function (m) { return m.skor; }).reduce(function (top, m) {
+    var s = m.skor.split("-").map(Number);
+    top.a += bizMi(m.ev) ? s[0] : s[1]; top.y += bizMi(m.ev) ? s[1] : s[0];
+    return top;
+  }, { a: 0, y: 0 });
+  var ozet = [[K.takim, K.lig + " · " + K.sezon]];
+  if (biz) {
+    ozet.push([sira + ".", K.grup + " sıralaması"]);
+    ozet.push([String(biz.P), "Puan"]);
+    ozet.push([biz.G + " - " + biz.B + " - " + biz.M, "Galibiyet - beraberlik - mağlubiyet"]);
+    ozet.push([gol.a + " : " + gol.y, "Attığı : yediği gol"]);
+  }
+  ozet.forEach(function (o) {
+    var d = el("div"); d.appendChild(el("strong", "", o[0])); d.appendChild(el("span", "", o[1]));
+    $("takim-ozet").appendChild(d);
+  });
+
+  /* Kadro: liste boşsa bölüm gizli kalır */
+  if (K.kadro.length) {
+    $("kadro-bolum").hidden = false;
+    $("teknik").textContent = K.teknikDirektor ? "Teknik direktör: " + K.teknikDirektor : "";
+    K.kadro.forEach(function (g) {
+      var d = el("div");
+      d.appendChild(el("h4", "", g.mevki));
+      var ul = el("ul");
+      g.oyuncular.forEach(function (o) {
+        var li = el("li");
+        li.appendChild(el("span", "no", String(o.no)));
+        li.appendChild(el("span", "", o.ad));
+        if (o.kaptan) li.appendChild(el("span", "rozet", "Kaptan"));
+        ul.appendChild(li);
       });
-      $("puan-govde").appendChild(tr);
+      d.appendChild(ul);
+      $("kadro-liste").appendChild(d);
     });
+  }
 
-  /* Takımlar */
-  $("teknik").textContent = "Teknik direktör: " + K.teknikDirektor;
-  K.kadro.forEach(function (g) {
-    var d = el("div");
-    d.appendChild(el("h4", "", g.mevki));
-    var ul = el("ul");
-    g.oyuncular.forEach(function (o) {
-      var li = el("li");
-      li.appendChild(el("span", "no", String(o.no)));
-      li.appendChild(el("span", "", o.ad));
-      if (o.kaptan) li.appendChild(el("span", "rozet", "Kaptan"));
-      ul.appendChild(li);
-    });
-    d.appendChild(ul);
-    $("kadro-liste").appendChild(d);
-  });
-  K.altyapi.forEach(function (t) {
-    var k = el("div", "kart");
-    k.appendChild(el("div", "yas", t.ad));
-    k.appendChild(el("p", "kucuk", t.dogum));
-    var dl = el("dl");
-    [["Antrenör", t.antrenor], ["Antrenman günleri", t.gunler]].forEach(function (c) {
-      var d = el("div"); d.appendChild(el("dt", "", c[0])); d.appendChild(el("dd", "", c[1])); dl.appendChild(d);
-    });
-    k.appendChild(dl);
-    $("altyapi-liste").appendChild(k);
-  });
-
-  /* Tesisler */
-  K.tesisler.forEach(function (t) {
+  /* Saha */
+  K.sahalar.forEach(function (s) {
     var k = el("div", "kart tesis");
-    k.appendChild(el("h3", "", t.ad));
-    k.appendChild(el("p", "kucuk", t.yer));
-    var ul = el("ul");
-    t.ozellikler.forEach(function (o) { ul.appendChild(el("li", "", o)); });
-    k.appendChild(ul);
-    $("tesis-liste").appendChild(k);
+    k.appendChild(el("h3", "", s.ad));
+    k.appendChild(el("p", "kucuk", s.yer));
+    k.appendChild(el("p", "saha-not", s.not));
+    $("saha-liste").appendChild(k);
   });
 
-  /* Futbol okulu ve künye */
-  $("okul-yazi").textContent = K.futbolOkulu.yazi;
-  K.futbolOkulu.maddeler.forEach(function (m) { $("okul-maddeler").appendChild(el("li", "", m)); });
-  [["Kuruluş", String(K.kurulus)], ["Renkler", K.renkler], ["Altyapı takımı", String(K.altyapi.length)]].forEach(function (c) {
+  /* Kulübe katıl ve künye */
+  $("katil-yazi").textContent = K.katilYazi;
+  [["Kuruluş", String(K.kurulus)], ["Renkler", K.renkler], ["Lig", K.lig]].forEach(function (c) {
     var d = el("div"); d.appendChild(el("dt", "", c[0])); d.appendChild(el("dd", "", c[1])); $("kunye").appendChild(d);
   });
 
-  /* İletişim */
+  /* İletişim: boş satırlar atlanır */
   [K.iletisim.adres, K.iletisim.telefon, K.iletisim.eposta, K.iletisim.saatler].forEach(function (s) {
-    $("iletisim-liste").appendChild(el("li", "", s));
+    if (s) $("iletisim-liste").appendChild(el("li", "", s));
   });
-  var ig = el("li"); var iga = el("a", "", "Instagram: " + K.instagramAd);
-  iga.href = K.instagram; iga.target = "_blank"; iga.rel = "noopener"; ig.appendChild(iga);
+  var ig = el("li"), iga = el("a", "", "Instagram: " + K.instagramAd);
+  disBaglanti(iga, K.instagram); ig.appendChild(iga);
   $("iletisim-liste").appendChild(ig);
 
   /* Başvuru formu */
@@ -210,7 +223,7 @@
       .then(function (yanit) {
         if (!yanit.ok) throw new Error("Sunucu " + yanit.status + " yanıtı verdi");
         form.reset();
-        durumYaz("Başvurunuz alındı. Kulüp sekreterliği sizi arayacak.", "tamam");
+        durumYaz("Başvurunuz alındı. Kulüp sizi arayacak.", "tamam");
       })
       .catch(function () {
         durumYaz("Başvuru gönderilemedi. Bağlantınızı kontrol edip yeniden deneyin ya da Instagram'dan (" + K.instagramAd + ") yazın.", "hata");

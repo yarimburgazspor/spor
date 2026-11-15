@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yarımburgaz Spor</title>
-<meta name="description" content="Yarımburgaz Spor Kulübü resmi sitesi: haberler, maç takvimi, takımlar, tesisler ve futbol okulu başvurusu.">
+<meta name="description" content="Yarımburgaz Spor Kulübü resmi sitesi: haberler, maç sonuçları, puan durumu ve kulübe katılım başvurusu.">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,17 +36,16 @@
     </a>
     <nav aria-label="Ana menü">
       <a href="#haberler">Haberler</a>
-      <a href="#mac-takvimi">Maç takvimi</a>
-      <a href="#takimlar">Takımlarımız</a>
-      <a href="#tesisler">Tesisler</a>
-      <a href="#futbol-okulu">Futbol okulu</a>
+      <a href="#mac-takvimi">Maçlar</a>
+      <a href="#puan-durumu">Puan durumu</a>
+      <a href="#takim">Takımımız</a>
       <a href="#iletisim">İletişim</a>
       <a class="dugme dugme-sari" href="#basvuru">Başvuru formu</a>
     </nav>
   </div>
 </header>
 
-<p class="ornek-uyari" id="ornek-uyari" hidden>Site kurulum aşamasında: haberler, maçlar, kadro ve iletişim bilgileri örnektir.</p>
+<p class="ornek-uyari" id="ornek-uyari" hidden>Site kurulum aşamasında: bazı bilgiler örnektir.</p>
 
 <main id="icerik">
 
@@ -54,12 +53,6 @@
     <div class="sar">
       <div class="bolum-bas">
         <h1>Haberler</h1>
-        <div class="sekmeler" role="group" aria-label="Haber filtresi">
-          <button type="button" data-kategori="tumu" aria-pressed="true">Tüm haberler</button>
-          <button type="button" data-kategori="a-takim" aria-pressed="false">A takım</button>
-          <button type="button" data-kategori="altyapi" aria-pressed="false">Altyapı</button>
-          <button type="button" data-kategori="futbol-okulu" aria-pressed="false">Futbol okulu</button>
-        </div>
       </div>
       <div class="haberler" id="haber-liste"></div>
     </div>
@@ -67,15 +60,19 @@
 
   <section class="bolum bolum-koyu" id="mac-takvimi">
     <div class="sar">
-      <h2>Maç takvimi</h2>
+      <div class="bolum-bas">
+        <h2 id="lig-baslik">Maçlar</h2>
+        <a class="dugme dugme-cizgi" id="kaynak-dugme" href="#mac-takvimi" rel="noopener">Puantaj ve fikstür</a>
+      </div>
       <div class="siradaki" id="siradaki"></div>
-      <div class="iki-sutun">
+      <div class="mac-puan">
         <div>
-          <h3>A takım maçları</h3>
+          <h3>Sonuçlar ve fikstür</h3>
           <ul class="maclar" id="maclar"></ul>
         </div>
-        <div>
+        <div id="puan-durumu">
           <h3 id="puan-baslik">Puan durumu</h3>
+          <p class="puan-alt" id="puan-alt"></p>
           <div class="tablo-sar">
             <table aria-labelledby="puan-baslik">
               <thead>
@@ -85,41 +82,36 @@
                   <th scope="col"><abbr title="Galibiyet">G</abbr></th>
                   <th scope="col"><abbr title="Beraberlik">B</abbr></th>
                   <th scope="col"><abbr title="Mağlubiyet">M</abbr></th>
-                  <th scope="col"><abbr title="Averaj">AV</abbr></th>
                   <th scope="col"><abbr title="Puan">P</abbr></th>
                 </tr>
               </thead>
               <tbody id="puan-govde"></tbody>
             </table>
           </div>
+          <p class="kaynak" id="kaynak-not"></p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="bolum" id="takimlar">
+  <section class="bolum" id="takim">
     <div class="sar">
-      <h2>Takımlarımız</h2>
-      <h3 class="alt-baslik">A takım <span id="teknik"></span></h3>
-      <div class="kadro" id="kadro-liste"></div>
-      <h3 class="alt-baslik">Altyapı takımları</h3>
-      <div class="kartlar dort" id="altyapi-liste"></div>
+      <h2>Takımımız</h2>
+      <div class="takim-ozet" id="takim-ozet"></div>
+      <div id="kadro-bolum" hidden>
+        <h3 class="alt-baslik">Kadro <span id="teknik"></span></h3>
+        <div class="kadro" id="kadro-liste"></div>
+      </div>
+      <h3 class="alt-baslik">Sahamız</h3>
+      <div class="kartlar iki" id="saha-liste"></div>
     </div>
   </section>
 
-  <section class="bolum bolum-gri" id="tesisler">
-    <div class="sar">
-      <h2>Tesisler</h2>
-      <div class="kartlar iki" id="tesis-liste"></div>
-    </div>
-  </section>
-
-  <section class="bolum" id="futbol-okulu">
+  <section class="bolum bolum-gri" id="katil">
     <div class="sar iki-sutun">
       <div>
-        <h2>Futbol okulu</h2>
-        <p class="yazi" id="okul-yazi"></p>
-        <ul class="madde" id="okul-maddeler"></ul>
+        <h2>Kulübe katıl</h2>
+        <p class="yazi" id="katil-yazi"></p>
         <dl class="kunye" id="kunye"></dl>
       </div>
       <form id="basvuru" novalidate>
@@ -164,7 +156,7 @@
     <div class="sar instagram-ic">
       <div>
         <h2>Bizi Instagram'da izleyin</h2>
-        <p>Maç fotoğrafları, antrenman görüntüleri ve duyurular önce orada paylaşılır.</p>
+        <p>Maç fotoğrafları ve duyurular önce orada paylaşılır.</p>
       </div>
       <a class="dugme dugme-koyu" id="instagram-dugme" href="#instagram" rel="noopener"></a>
     </div>
@@ -182,9 +174,9 @@
       <h3>Hızlı erişim</h3>
       <ul>
         <li><a href="#haberler">Haberler</a></li>
-        <li><a href="#mac-takvimi">Maç takvimi</a></li>
-        <li><a href="#takimlar">Takımlarımız</a></li>
-        <li><a href="#tesisler">Tesisler</a></li>
+        <li><a href="#mac-takvimi">Maçlar</a></li>
+        <li><a href="#puan-durumu">Puan durumu</a></li>
+        <li><a href="#takim">Takımımız</a></li>
         <li><a href="#basvuru">Başvuru formu</a></li>
       </ul>
     </div>
