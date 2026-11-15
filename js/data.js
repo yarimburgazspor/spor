@@ -125,6 +125,18 @@ window.KULUP = {
     { takim: "İstanbul Kiraç Spor Kulübü", G: 0, B: 0, M: 6 }
   ],
 
+  /* Sponsorluk bölümü. Metinler kulübün sponsorluk afişinden alınmıştır. */
+  sponsorluk: {
+    baslik: "Sponsorluk",
+    slogan: "Geleceğimiz için, hep birlikte",
+    yazi: "Yarımburgaz Spor Kulübü'ne yapacağınız sponsorluk desteği, ilgili mevzuatta belirtilen şartların yerine getirilmesi kaydıyla, amatör spor dallarına yönelik sponsorluk harcamaları kapsamında gelir veya kurumlar vergisi matrahından %100 oranında indirilebilmektedir.",
+    uyari: "Bu tutar doğrudan vergi iadesi değil, vergi matrahından indirim avantajıdır. Kendi durumunuz için mali müşavirinize danışın.",
+    dayanak: ["193 sayılı Gelir Vergisi Kanunu, madde 89/8", "5520 sayılı Kurumlar Vergisi Kanunu, madde 10/1-b"],
+    kazanimlar: ["Marka görünürlüğü", "Toplumsal katkı", "Geleceğe yatırım", "Vergisel avantaj"],
+    resim: "images/sponsorluk.jpg",
+    resimAciklama: "Yarımburgaz Spor Kulübü sponsorluk afişi: sponsorlukta yüzde 100 vergi matrahı indirimi avantajı"
+  },
+
   /* Kadro eklemek için: { mevki: "Kaleci", oyuncular: [{ no: 1, ad: "Ad Soyad", kaptan: true }] }
      Liste boşken kadro bölümü gösterilmez. */
   teknikDirektor: "",
@@ -146,5 +158,5 @@ window.KULUP = {
        formAdresi: "https://formspree.io/f/xxxxxxx"
      Boş kaldığı sürece form başvuru GÖNDERMEZ ve bunu ziyaretçiye açıkça söyler. */
   formAdresi: "",
-  basvuruTurleri: ["Sporcu başvurusu", "Kulüp üyeliği", "Gönüllü / antrenör"]
+  basvuruTurleri: ["Sporcu başvurusu", "Sponsorluk", "Kulüp üyeliği", "Gönüllü / antrenör"]
 };

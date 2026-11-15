@@ -276,6 +276,23 @@
     $("saha-liste").appendChild(k);
   });
 
+  /* Sponsorluk: düğme, başvuru formunda "Sponsorluk" türünü seçili getirir */
+  (function () {
+    var S = K.sponsorluk;
+    if (!S) { $("sponsorluk").hidden = true; return; }
+    $("sp-baslik").textContent = S.baslik;
+    $("sp-resim").src = S.resim; $("sp-resim").alt = S.resimAciklama;
+    $("sp-slogan").textContent = S.slogan;
+    $("sp-metin").textContent = S.yazi;
+    $("sp-uyari").textContent = S.uyari;
+    S.dayanak.forEach(function (d) { $("sp-dayanak").appendChild(el("li", "", d)); });
+    S.kazanimlar.forEach(function (k) { $("sp-kazanim").appendChild(el("li", "", k)); });
+    $("sp-dugme").addEventListener("click", function () {
+      var sec = $("f-tur");
+      if (K.basvuruTurleri.indexOf("Sponsorluk") !== -1) sec.value = "Sponsorluk";
+    });
+  })();
+
   /* Kulübe katıl ve künye */
   $("katil-yazi").textContent = K.katilYazi;
   [["Kuruluş", String(K.kurulus)], ["Renkler", K.renkler], ["Lig", K.lig]].forEach(function (c) {
