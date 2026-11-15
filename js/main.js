@@ -18,7 +18,6 @@
   function bizMi(ad) { return ad === K.takimAdi; }
 
   /* Başlık ve alt bilgi */
-  document.title = K.kisaAd;
   $("sayfa-baslik").textContent = K.ad;
   $("marka-ad").textContent = K.kisaAd;
   $("marka-alt").textContent = K.kurulus + " · " + K.renkler;

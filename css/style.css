@@ -361,3 +361,10 @@ form .dugme { justify-self: start; }
 
 /* Puan durumunun altındaki düğme ve Instagram simgesi */
 .sag-sutun { display: grid; gap: 14px; align-content: start; }
+
+/* Hakkımızda ve sık sorulan sorular */
+.hak-yazi p { margin: 0 0 12px; max-width: 62ch; }
+.sss h3 { font-size: 1.25rem; margin-bottom: 10px; }
+.sss details { border-bottom: 1px solid var(--cizgi); }
+.sss summary { cursor: pointer; padding: 11px 0; font-weight: 600; }
+.sss details p { margin: 0 0 12px; color: var(--yazi-2); }
