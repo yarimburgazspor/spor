@@ -246,6 +246,15 @@ window.KULUP = {
     url: "https://wa.me/905388177838"
   },
 
+  /* CANLI SOHBET (ana sayfa). acik: false yapılırsa sohbet kutusu sitede görünmez.
+     Buradaki anahtar herkese açık "yayın anahtarı"dır; gizli değildir, sitede durması normaldir.
+     Yazma kuralları ve küfür filtresi sunucuda (Supabase) çalışır. Yönetim: sohbet-yonetim.html */
+  sohbet: {
+    acik: true,
+    url: "https://ijzijxbgzkwmunitgfhq.supabase.co",
+    anahtar: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlqemlqeGJnemt3bXVuaXRnZmhxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ3NDAxMjgsImV4cCI6MjExMDMxNjEyOH0.kF9nh-7u3B0Krjr319J5sf6SFS57jFRDR_rHXXwVzZ0"
+  },
+
   /* BAŞVURU FORMU
      GitHub Pages yalnızca statik dosya yayınlar; formun bir alıcıya ihtiyacı var.
      Formspree gibi bir servisten aldığınız adresi buraya yazın:

@@ -137,7 +137,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=1794742951">
+<link rel="stylesheet" href="css/style.css?v=1794743401">
 </head>
 <body data-sayfa="ana">
 
@@ -242,6 +242,25 @@
         </table>
       </div>
       <p class="kaynak" id="kaynak-not"></p>
+    </div>
+    <!-- Canlı sohbet -->
+    <div class="panel sohbet" id="sohbet" aria-labelledby="sohbet-baslik">
+      <div class="panel-bas">
+        <h2 id="sohbet-baslik">Canlı sohbet</h2>
+        <span class="sohbet-rozet" id="sohbet-rozet">Bağlanıyor</span>
+      </div>
+      <ul class="sohbet-liste" id="sohbet-liste" aria-live="polite" aria-label="Sohbet mesajları" tabindex="0"></ul>
+      <form class="sohbet-form" id="sohbet-form" novalidate>
+        <label class="gizli" for="sohbet-ad">Kullanıcı adınız</label>
+        <input id="sohbet-ad" type="text" maxlength="24" autocomplete="nickname" placeholder="Kullanıcı adınız">
+        <div class="sohbet-satir">
+          <label class="gizli" for="sohbet-mesaj">Mesajınız</label>
+          <input id="sohbet-mesaj" type="text" maxlength="300" autocomplete="off" placeholder="Mesajınızı yazın">
+          <button class="dugme" type="submit" id="sohbet-gonder">Gönder</button>
+        </div>
+        <p class="sohbet-durum" id="sohbet-durum" role="status" aria-live="polite"></p>
+        <p class="sohbet-kural">Mesajlar herkese açıktır. Küfür, hakaret, bağlantı ve telefon numarası paylaşılamaz. Kişisel bilgilerinizi yazmayın.</p>
+      </form>
     </div>
     <!-- Instagram: Instagram'ın kendi profil yerleştirmesi. Profil önizlemesini ve son paylaşımları gösterir. -->
     <div class="panel" id="instagram" aria-labelledby="ig-baslik">
@@ -434,6 +453,7 @@
         <li><a href="#puan-durumu">Puan durumu</a></li>
         <li><a href="#haberler">Haberler</a></li>
         <li><a href="#gol-krali">Gol kralımız</a></li>
+        <li><a href="#sohbet">Canlı sohbet</a></li>
         <li><a href="#instagram">Instagram</a></li>
       </ul>
     </nav>
@@ -450,7 +470,8 @@
   </div>
 </footer>
 
-<script src="js/data.js?v=1794742951"></script>
-<script src="js/main.js?v=1794742951"></script>
+<script src="js/data.js?v=1794743401"></script>
+<script src="js/main.js?v=1794743401"></script>
+<script src="js/sohbet.js?v=1794743401"></script>
 </body>
 </html>

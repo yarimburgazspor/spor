@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /sohbet-yonetim.html
 
 Sitemap: https://yarimburgazspor.com/sitemap.xml

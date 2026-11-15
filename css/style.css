@@ -435,3 +435,23 @@ form .dugme { justify-self: start; }
   .saha-oyuncu { width: 72px; min-width: 0; flex: 0 1 72px; }
   .saha-oyuncu small { font-size: .6rem; padding: 1px 4px; }
 }
+
+/* Canlı sohbet */
+.sohbet-rozet { font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--yazi-2); display: inline-flex; align-items: center; gap: 6px; }
+.sohbet-rozet::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: #b9b3b4; }
+.sohbet-rozet.canli { color: var(--basari); }
+.sohbet-rozet.canli::before { background: #2a9d5c; box-shadow: 0 0 0 3px rgba(42,157,92,.25); }
+.sohbet-liste { list-style: none; margin: 0; padding: 12px 16px; height: 340px; overflow-y: auto; display: grid; gap: 10px; align-content: start; background: var(--serit); border-bottom: 1px solid var(--cizgi); }
+.sohbet-liste li { background: var(--kart); border-radius: 3px; padding: 8px 12px; border-left: 3px solid var(--kirmizi); }
+.sohbet-liste li.sohbet-bos { background: none; border: 0; color: var(--yazi-2); text-align: center; padding-top: 40px; }
+.sohbet-ust { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.sohbet-ust strong { font-size: .88rem; color: var(--vurgu); overflow-wrap: anywhere; }
+.sohbet-ust time { font-size: .72rem; color: var(--yazi-2); white-space: nowrap; }
+.sohbet-liste p { margin: 2px 0 0; font-size: .92rem; overflow-wrap: anywhere; }
+.sohbet-form { background: var(--kart); border: 0; padding: 14px 16px 12px; display: grid; gap: 8px; }
+.sohbet-satir { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+.sohbet-form input { background: var(--zemin); }
+.sohbet-form .dugme { padding: 10px 16px; justify-self: stretch; }
+.sohbet-durum { margin: 0; font-size: .85rem; min-height: 1.3em; color: var(--yazi-2); }
+.sohbet-durum.hata { color: var(--uyari); }
+.sohbet-kural { margin: 0; font-size: .74rem; color: var(--yazi-2); line-height: 1.4; }

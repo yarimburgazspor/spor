@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sohbet yönetimi | Yarımburgaz Spor</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<style>
+  :root { --kirmizi: #d1261b; --koyu: #242021; --zemin: #edeeef; --kart: #fff; --yazi: #242021; --yazi-2: #6a6566; --cizgi: #e3e1e1; color-scheme: light; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--zemin); color: var(--yazi); font: 400 1rem/1.5 "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  header { background: var(--kirmizi); color: #fff; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  header h1 { margin: 0; font-size: 1.15rem; }
+  header a { color: #fff; }
+  main { max-width: 860px; margin: 0 auto; padding: 20px; display: grid; gap: 16px; }
+  .kart { background: var(--kart); border-radius: 4px; padding: 20px; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+  h2 { margin: 0 0 12px; font-size: 1.1rem; }
+  label { display: grid; gap: 4px; font-size: .92rem; font-weight: 500; margin-bottom: 12px; }
+  input { font: inherit; padding: 10px 12px; border: 1px solid var(--cizgi); border-radius: 3px; width: 100%; max-width: 360px; }
+  button { font: inherit; font-weight: 600; border: 0; border-radius: 3px; padding: 9px 14px; cursor: pointer; background: var(--kirmizi); color: #fff; }
+  button.ikincil { background: #f1efef; color: var(--yazi); border: 1px solid var(--cizgi); }
+  button.koyu { background: var(--koyu); }
+  button[disabled] { opacity: .6; cursor: default; }
+  :focus-visible { outline: 3px solid #f6d21c; outline-offset: 2px; }
+  .durum { min-height: 1.5em; margin: 10px 0 0; font-size: .92rem; }
+  .durum.hata { color: #9a5b00; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li.mesaj { display: grid; grid-template-columns: 1fr auto; gap: 6px 14px; padding: 12px 0; border-bottom: 1px solid var(--cizgi); align-items: start; }
+  li.mesaj p { margin: 2px 0 0; overflow-wrap: anywhere; }
+  li.mesaj small { color: var(--yazi-2); }
+  .dugmeler { display: flex; gap: 8px; flex-wrap: wrap; }
+  .ust-satir { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Sohbet yönetimi</h1>
+  <a href="./">Siteye dön</a>
+</header>
+<main>
+  <section class="kart" id="giris-kart">
+    <h2>Yönetici girişi</h2>
+    <form id="giris-form">
+      <label for="g-eposta">E-posta<input id="g-eposta" type="email" autocomplete="username" required></label>
+      <label for="g-sifre">Şifre<input id="g-sifre" type="password" autocomplete="current-password" required></label>
+      <button type="submit" id="g-dugme">Giriş yap</button>
+    </form>
+    <p class="durum" id="giris-durum" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="kart" id="panel" hidden>
+    <div class="ust-satir">
+      <h2>Son mesajlar</h2>
+      <div class="dugmeler">
+        <button type="button" class="ikincil" id="yenile">Yenile</button>
+        <button type="button" class="ikincil" id="cikis">Çıkış yap</button>
+      </div>
+    </div>
+    <p><strong>Sil</strong> yalnızca o mesajı kaldırır. <strong>Engelle</strong> mesajı yazan kişinin tüm mesajlarını siler ve yeniden yazmasını engeller.</p>
+    <p class="durum" id="panel-durum" role="status" aria-live="polite"></p>
+    <ul id="mesajlar"></ul>
+  </section>
+</main>
+
+<script src="js/data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  var A = window.KULUP.sohbet, $ = function (id) { return document.getElementById(id); };
+  var istemci = window.supabase.createClient(A.url, A.anahtar);
+  function el(e, s, y) { var o = document.createElement(e); if (s) o.className = s; if (y !== undefined) o.textContent = y; return o; }
+  function yaz(id, yazi, hata) { $(id).textContent = yazi; $(id).className = "durum" + (hata ? " hata" : ""); }
+
+  function panelAc() {
+    istemci.rpc("sohbet_yonetici_mi").then(function (y) {
+      if (y.error || !y.data) {
+        yaz("giris-durum", "Bu hesap sohbet yöneticisi olarak tanımlı değil. Yönetici listesine eklenmesi gerekiyor.", true);
+        istemci.auth.signOut(); return;
+      }
+      $("giris-kart").hidden = true; $("panel").hidden = false; yukle();
+    });
+  }
+  function yukle() {
+    yaz("panel-durum", "Yükleniyor…");
+    istemci.from("sohbet_mesajlari").select("id, ad, mesaj, olusturuldu").order("id", { ascending: false }).limit(200).then(function (y) {
+      if (y.error) { yaz("panel-durum", "Mesajlar yüklenemedi. Yeniden deneyin.", true); return; }
+      var liste = $("mesajlar"); liste.textContent = "";
+      yaz("panel-durum", y.data.length ? y.data.length + " mesaj gösteriliyor." : "Henüz mesaj yok.");
+      y.data.forEach(function (m) {
+        var li = el("li", "mesaj"), sol = el("div");
+        sol.appendChild(el("strong", "", m.ad));
+        sol.appendChild(el("small", "", " · " + new Date(m.olusturuldu).toLocaleString("tr-TR")));
+        sol.appendChild(el("p", "", m.mesaj));
+        var sag = el("div", "dugmeler");
+        var sil = el("button", "ikincil", "Sil"); sil.type = "button";
+        sil.addEventListener("click", function () {
+          sil.disabled = true;
+          istemci.rpc("sohbet_mesaj_sil", { p_id: m.id }).then(function (r) {
+            if (r.error) { sil.disabled = false; yaz("panel-durum", "Mesaj silinemedi. Yeniden deneyin.", true); return; }
+            li.remove(); yaz("panel-durum", "Mesaj silindi.");
+          });
+        });
+        var engel = el("button", "koyu", "Engelle"); engel.type = "button";
+        var onay = false;
+        engel.addEventListener("click", function () {
+          if (!onay) { onay = true; engel.textContent = "Emin misiniz? Engelle"; return; }
+          engel.disabled = true;
+          istemci.rpc("sohbet_engelle", { p_id: m.id }).then(function (r) {
+            if (r.error) { engel.disabled = false; yaz("panel-durum", "Kişi engellenemedi. Yeniden deneyin.", true); return; }
+            yukle();
+          });
+        });
+        sag.appendChild(sil); sag.appendChild(engel);
+        li.appendChild(sol); li.appendChild(sag); liste.appendChild(li);
+      });
+    });
+  }
+
+  $("giris-form").addEventListener("submit", function (olay) {
+    olay.preventDefault();
+    $("g-dugme").disabled = true; yaz("giris-durum", "Giriş yapılıyor…");
+    istemci.auth.signInWithPassword({ email: $("g-eposta").value.trim(), password: $("g-sifre").value }).then(function (y) {
+      $("g-dugme").disabled = false;
+      if (y.error) { yaz("giris-durum", "Giriş yapılamadı. E-posta ya da şifre hatalı.", true); return; }
+      $("g-sifre").value = ""; yaz("giris-durum", ""); panelAc();
+    });
+  });
+  $("yenile").addEventListener("click", yukle);
+  $("cikis").addEventListener("click", function () {
+    istemci.auth.signOut().then(function () { $("panel").hidden = true; $("giris-kart").hidden = false; });
+  });
+  istemci.auth.getSession().then(function (y) { if (y.data && y.data.session) panelAc(); });
+})();
+</script>
+</body>
+</html>
