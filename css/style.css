@@ -368,3 +368,24 @@ form .dugme { justify-self: start; }
 .sss details { border-bottom: 1px solid var(--cizgi); }
 .sss summary { cursor: pointer; padding: 11px 0; font-weight: 600; }
 .sss details p { margin: 0 0 12px; color: var(--yazi-2); }
+
+/* U17 kadrosu: oyuncu kartları (fotoğraf 3:4) */
+.kadro-td { font-size: .85rem; color: var(--yazi-2); }
+.oyuncular { list-style: none; margin: 0; padding: 22px; display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 16px; }
+.oyuncu { background: var(--serit); border-radius: 3px; overflow: hidden; border-bottom: 4px solid var(--kirmizi); }
+.oyuncu-foto { aspect-ratio: 3 / 4; background: var(--koyu); }
+.oyuncu-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+.oyuncu-foto.bos { display: grid; place-items: center; background: repeating-linear-gradient(100deg, #2b2627 0 26px, #242021 26px 52px); }
+.oyuncu-foto.bos span { font: 700 4.6rem/1 var(--baslik-yazi); color: rgba(246,210,28,.85); font-variant-numeric: tabular-nums; }
+.oyuncu-bilgi { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: center; padding: 10px 12px; }
+.oyuncu-no { font: 700 1.7rem/1 var(--baslik-yazi); color: var(--vurgu); font-variant-numeric: tabular-nums; min-width: 28px; text-align: center; }
+.oyuncu-bilgi strong { display: block; font-size: .92rem; line-height: 1.25; }
+.oyuncu-bilgi small { display: inline-block; margin-top: 2px; font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--yazi-2); }
+.oyuncu-bilgi small.rozet { margin-left: 6px; }
+.kadro-not { margin: 0; padding: 0 22px 20px; font-size: .9rem; color: var(--yazi-2); }
+@media (max-width: 600px) { .oyuncular { grid-template-columns: 1fr 1fr; padding: 16px; gap: 12px; } }
+
+.oyuncu-foto.bos.harf span { font-size: 3.4rem; letter-spacing: .04em; color: rgba(255,255,255,.55); }
+.oyuncu-bilgi.nosuz { grid-template-columns: 1fr; }
+/* Başkan görseli dikey: yan sütunda kare çerçevede, yüz üstte kalacak şekilde gösterilir */
+.yan-baskan img { aspect-ratio: 1 / 1; object-fit: cover; object-position: 50% 22%; }

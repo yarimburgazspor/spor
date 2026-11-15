@@ -82,7 +82,7 @@ window.KULUP = {
   baskan: {
     baslik: "Başkanımız",
     ad: "Recai Şaz",
-    resim: "images/baskan.jpg",
+    resim: "images/baskan-2.jpg",
     resimAciklama: "Yarımburgaz Spor Kulübü Başkanı Recai Şaz, makamında"
   },
 
@@ -185,10 +185,47 @@ window.KULUP = {
     resimAciklama: "Yarımburgaz Spor Kulübü sponsorluk afişi: sponsorlukta yüzde 100 vergi matrahı indirimi avantajı"
   },
 
-  /* Kadro eklemek için: { mevki: "Kaleci", oyuncular: [{ no: 1, ad: "Ad Soyad", kaptan: true }] }
-     Liste boşken kadro bölümü gösterilmez. */
+  /* U17 KADROMUZ
+     Her oyuncu için bir satır: { no: 11, ad: "Ad Soyad", mevki: "Forvet", dogumYili: 2010, foto: "images/kadro/11.jpg" }
+     - no: forma numarası; bilinmiyorsa null yazın.
+     - mevki: "Kaleci", "Defans", "Orta saha" ya da "Forvet"; bilinmiyorsa "" bırakın.
+     - dogumYili: yalnızca yıl. Oyuncular reşit olmadığı için tam doğum tarihi sitede yayınlanmaz.
+     - foto: boşsa forma numaralı (ya da baş harfli) yer tutucu gösterilir. Fotoğraf dikey (3:4) olmalı;
+       dosyayı images/kadro/ klasörüne koyup yolunu buraya yazın. */
+  kadroBaslik: "U17 Kadromuz",
   teknikDirektor: "",
-  kadro: [],
+  kadroNot: "",
+  kadro: [
+    { no: null, ad: "Yasin Aksu", mevki: "", dogumYili: 2010, foto: "" },
+    { no: null, ad: "Mustafa Dönmez", mevki: "", dogumYili: 2010, foto: "" },
+    { no: null, ad: "Mustafa Çakmak", mevki: "", dogumYili: 2010, foto: "" },
+    { no: null, ad: "Süleyman Teymur", mevki: "", dogumYili: 2010, foto: "" },
+    { no: null, ad: "Ömürcan Özer", mevki: "", dogumYili: 2010, foto: "" },
+    { no: null, ad: "Hazar Çapan", mevki: "", dogumYili: 2010, foto: "" },
+    { no: null, ad: "Muhammed Çelik", mevki: "", dogumYili: 2010, foto: "" },
+    { no: null, ad: "Cihat Duran", mevki: "", dogumYili: 2010, foto: "" },
+    { no: 11, ad: "Muhammed Can Ceylan", mevki: "", dogumYili: 2010, foto: "" },
+    { no: null, ad: "Harun Hanedar", mevki: "", dogumYili: 2010, foto: "" },
+    { no: null, ad: "Ömer Faruk Polat", mevki: "", dogumYili: 2010, foto: "" },
+    { no: null, ad: "Mert Dönmez", mevki: "", dogumYili: 2010, foto: "" },
+    { no: null, ad: "Olcay Kamacı", mevki: "", dogumYili: 2010, foto: "" },
+    { no: null, ad: "Arif Hamza Özen", mevki: "", dogumYili: 2010, foto: "" },
+    { no: null, ad: "Kerem Güngör", mevki: "", dogumYili: 2010, foto: "" },
+    { no: null, ad: "Muhammed Ali Çetin", mevki: "", dogumYili: 2010, foto: "" },
+    { no: null, ad: "Berat Yıldız", mevki: "", dogumYili: 2010, foto: "" },
+    { no: null, ad: "Çetin Can Uğur", mevki: "", dogumYili: 2010, foto: "" },
+    { no: null, ad: "Muhammed Taha Artuç", mevki: "", dogumYili: 2010, foto: "" },
+    { no: null, ad: "Ümeyir Tiz", mevki: "", dogumYili: 2011, foto: "" },
+    { no: null, ad: "Alperen Polat", mevki: "", dogumYili: 2011, foto: "" },
+    { no: null, ad: "Halit Zalat", mevki: "", dogumYili: 2011, foto: "" },
+    { no: null, ad: "Mustafa Can Gülbeyaz", mevki: "", dogumYili: 2011, foto: "" },
+    { no: null, ad: "Mehmet Reşit Duran", mevki: "", dogumYili: 2011, foto: "" },
+    { no: null, ad: "Ahmet Efe Kalkanbaş", mevki: "", dogumYili: 2011, foto: "" },
+    { no: null, ad: "Muhammed Emir Bozdağ", mevki: "", dogumYili: 2011, foto: "" },
+    { no: null, ad: "Muhammet Ali Gülbetekin", mevki: "", dogumYili: 2011, foto: "" },
+    { no: null, ad: "Bünyamin Tekdemir", mevki: "", dogumYili: 2011, foto: "" },
+    { no: null, ad: "Yiğit Ali Polat", mevki: "", dogumYili: null, foto: "" }
+  ],
 
   sahalar: [
     { ad: "İBB 100. Yıl Stadı", yer: "Küçükçekmece (Halkalı Etap)",

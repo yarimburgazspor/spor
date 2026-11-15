@@ -287,25 +287,45 @@
     $("takim-ozet").appendChild(d);
   });
 
-  /* Kadro: liste boşsa bölüm gizli kalır */
-  if (K.kadro.length) {
-    $("kadro-bolum").hidden = false;
+  /* U17 kadrosu: mevki sırasına, sonra forma numarasına göre dizilir. Liste boşsa bölüm gizli kalır. */
+  (function () {
+    if (!K.kadro || !K.kadro.length) return;
+    $("kadro").hidden = false;
+    $("kadro-baslik").textContent = K.kadroBaslik || "Kadromuz";
     $("teknik").textContent = K.teknikDirektor ? "Teknik direktör: " + K.teknikDirektor : "";
-    K.kadro.forEach(function (g) {
-      var d = el("div");
-      d.appendChild(el("h4", "", g.mevki));
-      var ul = el("ul");
-      g.oyuncular.forEach(function (o) {
-        var li = el("li");
-        li.appendChild(el("span", "no", String(o.no)));
-        li.appendChild(el("span", "", o.ad));
-        if (o.kaptan) li.appendChild(el("span", "rozet", "Kaptan"));
-        ul.appendChild(li);
-      });
-      d.appendChild(ul);
-      $("kadro-liste").appendChild(d);
+    $("kadro-not").textContent = K.kadroNot || "";
+    $("kadro-not").hidden = !K.kadroNot;
+    var sira = { "Kaleci": 0, "Defans": 1, "Orta saha": 2, "Forvet": 3 };
+    K.kadro.map(function (o, i) { return { o: o, i: i }; }).sort(function (a, b) {
+      var sa = a.o.mevki in sira ? sira[a.o.mevki] : 9, sb = b.o.mevki in sira ? sira[b.o.mevki] : 9;
+      return sa - sb || (a.o.no || 999) - (b.o.no || 999) || a.i - b.i;
+    }).forEach(function (kayit) {
+      var o = kayit.o;
+      var li = el("li", "oyuncu");
+      var kare = el("div", "oyuncu-foto");
+      if (o.foto) {
+        var img = el("img"); img.src = o.foto; img.alt = o.ad; img.loading = "lazy"; kare.appendChild(img);
+      } else {
+        /* Fotoğraf yoksa: forma numarası, o da yoksa adın ve soyadın baş harfleri */
+        var parca = o.ad.split(" ");
+        kare.className += " bos" + (o.no ? "" : " harf");
+        kare.setAttribute("aria-hidden", "true");
+        kare.appendChild(el("span", "", o.no ? String(o.no) : parca[0].charAt(0) + parca[parca.length - 1].charAt(0)));
+      }
+      li.appendChild(kare);
+      var bilgi = el("div", "oyuncu-bilgi" + (o.no ? "" : " nosuz"));
+      if (o.no) bilgi.appendChild(el("span", "oyuncu-no", String(o.no)));
+      var ad = el("div"); ad.appendChild(el("strong", "", o.ad));
+      var alt = [];
+      if (o.mevki) alt.push(o.mevki);
+      if (o.dogumYili) alt.push(o.dogumYili + " doğumlu");
+      if (alt.length) ad.appendChild(el("small", "", alt.join(" · ")));
+      if (o.kaptan) ad.appendChild(el("small", "rozet", "Kaptan"));
+      bilgi.appendChild(ad);
+      li.appendChild(bilgi);
+      $("kadro-liste").appendChild(li);
     });
-  }
+  })();
 
   /* Kulüp bilgileri */
   (K.kulupBilgi || []).forEach(function (b) {

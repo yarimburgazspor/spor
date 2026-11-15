@@ -137,7 +137,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=1794737702">
+<link rel="stylesheet" href="css/style.css?v=1794741178">
 </head>
 <body>
 
@@ -161,6 +161,7 @@
       <a href="#maclar-bolum">Puantaj ve fikstür</a>
       <a href="#haberler">Haberler</a>
       <a href="#gol-krali">Gol kralımız</a>
+      <a href="#kadro">Kadro</a>
       <a href="#takim">Takımımız</a>
       <a href="#sponsorluk">Sponsorluk</a>
       <a href="#basvuru">Başvuru</a>
@@ -195,7 +196,7 @@
       <figure class="yan-gorsel" id="yan-gorsel"><img id="yan-resim" alt="" width="466" height="612"></figure>
       <figure class="yan-baskan" id="yan-baskan" hidden>
         <figcaption><strong id="baskan-baslik"></strong><span id="baskan-ad"></span></figcaption>
-        <img id="baskan-resim" alt="" width="876" height="569">
+        <img id="baskan-resim" alt="" width="800" height="1208">
       </figure>
     </aside>
   </section>
@@ -290,6 +291,15 @@
     </div>
   </section>
 
+  <!-- U17 Kadromuz: oyuncu kartları. Fotoğrafı olmayan oyuncuda forma numaralı yer tutucu çıkar. -->
+  <section class="sar bolum" id="kadro" aria-labelledby="kadro-baslik" hidden>
+    <div class="panel">
+      <div class="panel-bas"><h2 id="kadro-baslik"></h2><span class="kadro-td" id="teknik"></span></div>
+      <ul class="oyuncular" id="kadro-liste"></ul>
+      <p class="kadro-not" id="kadro-not"></p>
+    </div>
+  </section>
+
   <!-- Hakkımızda ve sık sorulan sorular: düz metin, betik gerektirmez -->
   <section class="sar bolum" id="hakkimizda" aria-labelledby="hak-baslik">
     <div class="panel">
@@ -319,10 +329,6 @@
       <div class="panel-bas"><h2>Takımımız</h2></div>
       <div class="panel-ic">
         <div class="takim-ozet" id="takim-ozet"></div>
-        <div id="kadro-bolum" hidden>
-          <h3 class="alt-baslik">Kadro <span id="teknik"></span></h3>
-          <div class="kadro" id="kadro-liste"></div>
-        </div>
         <h3 class="alt-baslik">Kulüp bilgileri</h3>
         <dl class="bilgi" id="kulup-bilgi"></dl>
         <h3 class="alt-baslik">Sahamız</h3>
@@ -424,7 +430,7 @@
       <ul>
         <li><a href="#hakkimizda">Hakkımızda</a></li>
         <li><a href="#takim">Kulüp bilgileri</a></li>
-        <li><a href="#takim">Takımımız</a></li>
+        <li><a href="#kadro">U17 kadromuz</a></li>
         <li><a href="#sponsorlar">Sponsorlarımız</a></li>
         <li><a href="#sponsorluk">Sponsorluk</a></li>
         <li><a href="#basvuru">Başvuru formu</a></li>
@@ -453,7 +459,7 @@
   </div>
 </footer>
 
-<script src="js/data.js?v=1794737702"></script>
-<script src="js/main.js?v=1794737702"></script>
+<script src="js/data.js?v=1794741178"></script>
+<script src="js/main.js?v=1794741178"></script>
 </body>
 </html>
