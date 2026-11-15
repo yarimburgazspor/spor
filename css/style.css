@@ -53,7 +53,7 @@ h1, h2, h3, h4 { font-family: var(--baslik-yazi); font-weight: 700; line-height:
 .marka img { width: 50px; flex: none; filter: drop-shadow(0 1px 2px rgba(0,0,0,.35)); }
 .marka strong { display: block; font: 700 1.25rem/1 var(--baslik-yazi); text-transform: uppercase; letter-spacing: .03em; }
 .marka small { display: block; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; margin-top: 3px; color: #ffe9a6; }
-.ust nav { display: flex; align-items: center; gap: 2px 26px; flex-wrap: wrap; }
+.ust nav { display: flex; align-items: center; gap: 2px 20px; flex-wrap: wrap; }
 .ust nav a { color: #fff; text-decoration: none; font-weight: 600; font-size: .95rem; padding: 8px 0; border-bottom: 3px solid transparent; }
 .ust nav a:hover { border-bottom-color: var(--sari); }
 
@@ -389,3 +389,36 @@ form .dugme { justify-self: start; }
 .oyuncu-bilgi.nosuz { grid-template-columns: 1fr; }
 /* Başkan görseli dikey: yan sütunda kare çerçevede, yüz üstte kalacak şekilde gösterilir */
 .yan-baskan img { aspect-ratio: 1 / 1; object-fit: cover; object-position: 50% 22%; }
+
+/* Menüde öne çıkan U17 bağlantısı */
+.ust nav a.menu-one { background: var(--sari); color: #242021; padding: 7px 12px; border-radius: 3px; border-bottom: 0; }
+.ust nav a.menu-one:hover, .ust nav a.menu-one[aria-current="page"] { background: #fff; }
+
+/* U17 sayfası: saha dizilişi */
+.panel-bas h1 { font: 500 1.15rem/1.25 var(--govde-yazi); text-transform: uppercase; letter-spacing: .01em; }
+.kadro-alt-baslik { font-size: 1.25rem; padding: 22px 22px 0; }
+.dizilis-sar { padding: 22px 22px 0; }
+.saha-cizim { position: relative; display: grid; grid-template-rows: repeat(4, auto); gap: 18px; padding: 34px 16px; border-radius: 6px; border: 3px solid rgba(255,255,255,.85); color: #fff;
+  background:
+    linear-gradient(rgba(255,255,255,.85), rgba(255,255,255,.85)) 0 50% / 100% 3px no-repeat,
+    repeating-linear-gradient(0deg, #2f8a4a 0 56px, #2a7f43 56px 112px); }
+.saha-cizim::before { content: ""; position: absolute; left: 50%; top: 50%; width: 130px; height: 130px; margin: -65px 0 0 -65px; border: 3px solid rgba(255,255,255,.85); border-radius: 50%; pointer-events: none; }
+.saha-cizim::after { content: ""; position: absolute; left: 50%; bottom: -3px; width: 240px; height: 84px; margin-left: -120px; border: 3px solid rgba(255,255,255,.85); pointer-events: none; }
+.hat { position: relative; z-index: 1; display: flex; flex-wrap: wrap; justify-content: space-evenly; gap: 14px 10px; min-height: 96px; align-items: flex-start; }
+.saha-oyuncu { width: 104px; display: grid; justify-items: center; text-align: center; gap: 2px; }
+.saha-foto { width: 62px; height: 62px; border-radius: 50%; overflow: hidden; border: 3px solid #fff; background: var(--koyu); box-shadow: 0 3px 8px rgba(0,0,0,.35); margin-bottom: 4px; }
+.saha-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; }
+.saha-foto.bos { display: grid; place-items: center; background: var(--kirmizi); }
+.saha-foto.bos span { font: 700 1.5rem/1 var(--baslik-yazi); color: var(--sari); }
+.saha-foto.bos.harf span { font-size: 1.15rem; color: #fff; }
+.saha-oyuncu strong { font-size: .8rem; line-height: 1.2; text-shadow: 0 1px 2px rgba(0,0,0,.6); }
+.saha-oyuncu small { font-size: .68rem; letter-spacing: .04em; text-transform: uppercase; background: rgba(0,0,0,.45); padding: 1px 6px; border-radius: 3px; }
+@media (max-width: 600px) {
+  .dizilis-sar { padding: 16px 16px 0; }
+  .saha-cizim { padding: 24px 6px; gap: 12px; }
+  .saha-oyuncu { width: 78px; }
+  .saha-foto { width: 48px; height: 48px; }
+  .saha-oyuncu strong { font-size: .7rem; }
+  .saha-cizim::after { width: 160px; height: 56px; margin-left: -80px; }
+  .saha-cizim::before { width: 90px; height: 90px; margin: -45px 0 0 -45px; }
+}

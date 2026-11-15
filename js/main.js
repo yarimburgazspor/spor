@@ -1,7 +1,10 @@
 (function () {
   "use strict";
   var K = window.KULUP;
-  var $ = function (id) { return document.getElementById(id); };
+  /* Aynı betik iki sayfada da çalışır (ana sayfa ve u17.html). Bir sayfada bulunmayan öğe
+     istenirse sayfaya bağlı olmayan boş bir kutu döner; o öğeye yazılanlar hiçbir yerde görünmez. */
+  var $ = function (id) { return document.getElementById(id) || document.createElement("div"); };
+  var varMi = function (id) { return !!document.getElementById(id); };
 
   function el(etiket, sinif, yazi) {
     var e = document.createElement(etiket);
@@ -62,6 +65,7 @@
   /* Büyük slider: 5 saniyede bir geçer; oklar, noktalar ve kaydırma ile de değişir.
      Fotoğraflar gruplar hâlinde gelir; alttaki başlık ve yazı, görünen fotoğrafın grubuna göre değişir. */
   (function () {
+    if (!varMi("vitrin")) return;
     var S = K.slider, kutu = $("vitrin"), slaytlar = [];
     ((S && S.gruplar) || []).forEach(function (g) {
       g.resimler.forEach(function (r) { slaytlar.push({ r: r, baslik: g.baslik, yazi: g.yazi }); });
@@ -254,6 +258,7 @@
   /* Instagram profil yerleştirmesi. Instagram'ın embed.js dosyası blockquote'u profil
      önizlemesine çevirir; yüklenemezse içindeki bağlantı görünür kalır. */
   (function () {
+    if (!varMi("ig-ic")) return;
     disBaglanti($("ig-dugme"), K.instagram);
     var bq = el("blockquote", "instagram-media");
     bq.setAttribute("data-instgrm-permalink", K.instagram);
@@ -287,32 +292,73 @@
     $("takim-ozet").appendChild(d);
   });
 
-  /* U17 kadrosu: mevki sırasına, sonra forma numarasına göre dizilir. Liste boşsa bölüm gizli kalır. */
+  /* U17 kadrosu (u17.html): saha dizilişi + oyuncu kartları. */
   (function () {
-    if (!K.kadro || !K.kadro.length) return;
-    $("kadro").hidden = false;
+    if (!varMi("kadro-liste") || !K.kadro || !K.kadro.length) return;
     $("kadro-baslik").textContent = K.kadroBaslik || "Kadromuz";
     $("teknik").textContent = K.teknikDirektor ? "Teknik direktör: " + K.teknikDirektor : "";
     $("kadro-not").textContent = K.kadroNot || "";
     $("kadro-not").hidden = !K.kadroNot;
-    var sira = { "Kaleci": 0, "Defans": 1, "Orta saha": 2, "Forvet": 3 };
-    K.kadro.map(function (o, i) { return { o: o, i: i }; }).sort(function (a, b) {
-      var sa = a.o.mevki in sira ? sira[a.o.mevki] : 9, sb = b.o.mevki in sira ? sira[b.o.mevki] : 9;
-      return sa - sb || (a.o.no || 999) - (b.o.no || 999) || a.i - b.i;
-    }).forEach(function (kayit) {
-      var o = kayit.o;
-      var li = el("li", "oyuncu");
-      var kare = el("div", "oyuncu-foto");
+
+    /* Mevki adından hat (0 kaleci, 1 defans, 2 orta saha, 3 forvet) ve kanat (-1 sol, 0 orta, 1 sağ) çıkarılır.
+       "Sol bek", "Stoper", "Sağ kanat", "Ön libero", "Santrfor" gibi yazımlar tanınır. */
+    function hat(mevki) {
+      var m = (mevki || "").toLocaleLowerCase("tr-TR");
+      if (!m) return -1;
+      if (m.indexOf("kaleci") !== -1) return 0;
+      if (/bek|stoper|defans|savunma|libero/.test(m) && m.indexOf("ön libero") === -1) return 1;
+      if (/forvet|santrfor|golcü|hücum/.test(m)) return 3;
+      return 2;
+    }
+    function kanat(mevki) {
+      var m = (mevki || "").toLocaleLowerCase("tr-TR");
+      return m.indexOf("sol") === 0 ? -1 : m.indexOf("sağ") === 0 ? 1 : 0;
+    }
+    function basHarf(o) { var p = o.ad.split(" "); return p[0].charAt(0) + p[p.length - 1].charAt(0); }
+    function foto(o, sinif) {
+      var kare = el("div", sinif);
       if (o.foto) {
         var img = el("img"); img.src = o.foto; img.alt = o.ad; img.loading = "lazy"; kare.appendChild(img);
       } else {
-        /* Fotoğraf yoksa: forma numarası, o da yoksa adın ve soyadın baş harfleri */
-        var parca = o.ad.split(" ");
         kare.className += " bos" + (o.no ? "" : " harf");
         kare.setAttribute("aria-hidden", "true");
-        kare.appendChild(el("span", "", o.no ? String(o.no) : parca[0].charAt(0) + parca[parca.length - 1].charAt(0)));
+        kare.appendChild(el("span", "", o.no ? String(o.no) : basHarf(o)));
       }
-      li.appendChild(kare);
+      return kare;
+    }
+    var sirali = K.kadro.map(function (o, i) { return { o: o, i: i, hat: hat(o.mevki) }; }).sort(function (a, b) {
+      var ha = a.hat < 0 ? 9 : a.hat, hb = b.hat < 0 ? 9 : b.hat;
+      return ha - hb || (a.o.no || 999) - (b.o.no || 999) || a.i - b.i;
+    });
+
+    /* Saha: ilk11 işaretli oyuncular varsa yalnızca onlar, yoksa mevkisi girilmiş herkes dizilir.
+       Forvet hattı üstte, kaleci altta; her hatta soldan sağa: sol, orta, sağ. */
+    var sahadakiler = sirali.filter(function (k) { return k.hat >= 0; });
+    var ilk11 = sahadakiler.filter(function (k) { return k.o.ilk11; });
+    if (ilk11.length) sahadakiler = ilk11;
+    if (sahadakiler.length) {
+      $("dizilis-sar").hidden = false;
+      [3, 2, 1, 0].forEach(function (h) {
+        var satir = el("div", "hat hat-" + h);
+        sahadakiler.filter(function (k) { return k.hat === h; })
+          .sort(function (a, b) { return kanat(a.o.mevki) - kanat(b.o.mevki) || a.i - b.i; })
+          .forEach(function (k) {
+            var d = el("div", "saha-oyuncu");
+            d.appendChild(foto(k.o, "saha-foto"));
+            d.appendChild(el("strong", "", k.o.ad));
+            d.appendChild(el("small", "", (k.o.no ? k.o.no + " · " : "") + k.o.mevki));
+            satir.appendChild(d);
+          });
+        $("dizilis").appendChild(satir);
+      });
+      $("dizilis").setAttribute("aria-label", "Saha dizilişi: " + sahadakiler.map(function (k) { return k.o.ad + " (" + k.o.mevki + ")"; }).join(", "));
+    } else {
+      $("kadro-liste-baslik").hidden = true;
+    }
+
+    sirali.forEach(function (k) {
+      var o = k.o, li = el("li", "oyuncu");
+      li.appendChild(foto(o, "oyuncu-foto"));
       var bilgi = el("div", "oyuncu-bilgi" + (o.no ? "" : " nosuz"));
       if (o.no) bilgi.appendChild(el("span", "oyuncu-no", String(o.no)));
       var ad = el("div"); ad.appendChild(el("strong", "", o.ad));
