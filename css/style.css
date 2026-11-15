@@ -336,12 +336,6 @@ form .dugme { justify-self: start; }
 .yan-baskan span { color: var(--yazi-2); }
 .yan-baskan img { width: 100%; }
 
-/* Geniş ekranda slider, yan sütunun boyuna uzar */
-@media (min-width: 981px) {
-  .ust-alan { align-items: stretch; }
-  .vitrin { min-height: 520px; }
-  .vitrin-cerceve { position: absolute; inset: 0; aspect-ratio: auto; }
-}
 @media (max-width: 980px) {
   .yan-gorsel { grid-row: span 3; }
 }
@@ -366,3 +360,6 @@ form .dugme { justify-self: start; }
 .ig-ic { padding: 22px; display: grid; justify-items: center; }
 .ig-ic .instagram-media { margin: 0 auto !important; max-width: 540px; width: 100%; }
 .ig-ic blockquote:not([class*="rendered"]) { border: 1px solid var(--cizgi); border-radius: 3px; padding: 22px; text-align: center; background: var(--serit); }
+
+/* Puan durumunun altındaki düğme ve Instagram simgesi */
+.sag-sutun { display: grid; gap: 14px; align-content: start; }

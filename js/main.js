@@ -41,7 +41,6 @@
   disBaglanti($("yan-instagram"), K.instagram);
   $("yan-instagram").setAttribute("aria-label", "Instagram: " + K.instagramAd);
   Array.prototype.forEach.call(document.querySelectorAll(".kaynak-dugme"), function (a) { disBaglanti(a, K.ligKaynak.url); });
-  $("yan-dugme").textContent = "Puantaj ve fikstür";
 
   var maclar = K.fikstur.slice().sort(function (a, b) { return a.hafta - b.hafta; });
 
