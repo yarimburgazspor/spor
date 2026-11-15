@@ -28,7 +28,8 @@ window.KULUP = {
     { etiket: "İl", deger: "İstanbul" },
     { etiket: "İlçe", deger: "Küçükçekmece" },
     { etiket: "Kuruluş", deger: "2012" },
-    { etiket: "Renkler", deger: "Kırmızı - Sarı" }
+    { etiket: "Renkler", deger: "Kırmızı - Sarı" },
+    { etiket: "Adres", deger: "Halkalı Etap Stadı, Atakent Mah. 3. Etap 4. Cad. No: 37/A, Küçükçekmece / İstanbul" }
   ],
   ilce: "Küçükçekmece / İstanbul",
 
@@ -137,7 +138,7 @@ window.KULUP = {
   katilYazi: "Kulübümüzde forma giymek isteyen sporcular ve veliler formu doldurabilir. 18 yaşından küçükler için başvuruyu veli yapar.",
 
   /* Boş bırakılan satırlar sitede gösterilmez. */
-  iletisim: { adres: "", telefon: "", eposta: "", saatler: "" },
+  iletisim: { adres: "Halkalı Etap Stadı, Atakent Mah. 3. Etap 4. Cad. No: 37/A, Küçükçekmece / İstanbul", telefon: "", eposta: "", saatler: "" },
 
   /* BAŞVURU FORMU
      GitHub Pages yalnızca statik dosya yayınlar; formun bir alıcıya ihtiyacı var.
