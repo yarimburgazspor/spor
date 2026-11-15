@@ -299,6 +299,18 @@
     $("saha-liste").appendChild(k);
   });
 
+  /* Sponsorlarımız: eşit ölçülü kutular */
+  if (K.sponsorlar && K.sponsorlar.length) {
+    $("sponsorlar").hidden = false;
+    K.sponsorlar.forEach(function (s) {
+      var li = el("li");
+      var img = el("img"); img.src = s.logo; img.alt = s.ad; img.loading = "lazy";
+      if (s.url) { var a = el("a"); disBaglanti(a, s.url); a.appendChild(img); li.appendChild(a); }
+      else li.appendChild(img);
+      $("sponsor-liste").appendChild(li);
+    });
+  }
+
   /* Sponsorluk: düğme, başvuru formunda "Sponsorluk" türünü seçili getirir */
   (function () {
     var S = K.sponsorluk;

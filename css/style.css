@@ -333,3 +333,14 @@ form .dugme { justify-self: start; }
   .yan-gorsel { grid-row: auto; max-width: 320px; margin: 0 auto; }
   .yan-baskan { max-width: 320px; width: 100%; margin: 0 auto; }
 }
+
+/* Sponsorlarımız: her kutu aynı ölçüde (180 x 120), görsel kutuya sığdırılır */
+.sponsorlar { list-style: none; margin: 0; padding: 20px 22px; display: flex; flex-wrap: wrap; gap: 16px; }
+.sponsorlar li { width: 180px; height: 120px; background: #fff; border: 1px solid var(--cizgi); border-radius: 3px; display: grid; place-items: center; padding: 10px; }
+.sponsorlar a { display: grid; place-items: center; width: 100%; height: 100%; }
+.sponsorlar img { max-width: 100%; max-height: 98px; width: auto; height: auto; object-fit: contain; }
+@media (max-width: 600px) {
+  .sponsorlar { padding: 16px; gap: 12px; }
+  .sponsorlar li { width: calc(50% - 6px); height: 104px; }
+  .sponsorlar img { max-height: 82px; }
+}

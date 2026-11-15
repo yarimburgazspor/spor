@@ -149,6 +149,13 @@ window.KULUP = {
     videoAciklama: "Ahmet Efe ve Ahmet Çalık anısına hazırlanan video"
   },
 
+  /* Sponsorlar. Yeni sponsor için görseli images/ klasörüne koyup bir satır ekleyin.
+     url doluysa görsel o adrese bağlantı olur. Kutular hep aynı ölçüdedir. */
+  sponsorlar: [
+    { ad: "Örtaş Antrepo", logo: "images/sponsor-ortas-antrepo.jpg", url: "" },
+    { ad: "Elyaka Kozmetik", logo: "images/sponsor-elyaka-kozmetik.jpg", url: "" }
+  ],
+
   /* Sponsorluk bölümü. Metinler kulübün sponsorluk afişinden alınmıştır. */
   sponsorluk: {
     baslik: "Sponsorluk",
