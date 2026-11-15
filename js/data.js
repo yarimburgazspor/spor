@@ -199,7 +199,7 @@ window.KULUP = {
   kadroNot: "",
   kadro: [
     { no: 3, ad: "Yasin Aksu", mevki: "Sol bek", ilk11: true, dogumYili: 2010, foto: "" },
-    { no: null, ad: "Mustafa Dönmez", mevki: "", dogumYili: 2010, foto: "" },
+    { no: 7, ad: "Mustafa Dönmez", mevki: "Santrfor", ilk11: true, dogumYili: 2010, foto: "" },
     { no: null, ad: "Mustafa Çakmak", mevki: "", dogumYili: 2010, foto: "" },
     { no: null, ad: "Süleyman Teymur", mevki: "", dogumYili: 2010, foto: "" },
     { no: 41, ad: "Ömürcan Özer", mevki: "Kaleci", ilk11: true, dogumYili: 2010, foto: "" },
