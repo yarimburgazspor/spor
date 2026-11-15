@@ -469,3 +469,8 @@ form .dugme { justify-self: start; }
   .sohbet-ac { right: 12px; bottom: 12px; padding: 13px 18px; }
   .sohbet { right: 8px; left: 8px; bottom: 8px; width: auto; height: min(520px, calc(100vh - 16px)); }
 }
+
+/* Günün videosu (dikey video, sağ sütun) */
+.gv-ic { padding: 14px; display: grid; gap: 10px; justify-items: center; }
+.gv-ic video { width: 100%; max-width: 330px; height: auto; aspect-ratio: 9 / 16; border-radius: 3px; background: #000; display: block; }
+.gv-ic p { margin: 0; font-size: .92rem; text-align: center; color: var(--yazi-2); }

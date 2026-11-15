@@ -225,6 +225,17 @@
     v.setAttribute("aria-label", A.videoAciklama);
   })();
 
+  /* Günün videosu */
+  if (K.gununVideosu && varMi("gunun-videosu")) {
+    $("gunun-videosu").hidden = false;
+    $("gv-baslik").textContent = K.gununVideosu.baslik;
+    $("gv-aciklama").textContent = K.gununVideosu.aciklama || "";
+    $("gv-aciklama").hidden = !K.gununVideosu.aciklama;
+    $("gv-video").src = K.gununVideosu.video;
+    $("gv-video").poster = K.gununVideosu.kapak;
+    $("gv-video").setAttribute("aria-label", K.gununVideosu.baslik + ": " + (K.gununVideosu.aciklama || ""));
+  }
+
   /* Slider'ın yanındaki görsel */
   if (K.yanResim && K.yanResim.dosya) {
     $("yan-resim").src = K.yanResim.dosya; $("yan-resim").alt = K.yanResim.aciklama;

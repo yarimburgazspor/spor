@@ -86,6 +86,15 @@ window.KULUP = {
     resimAciklama: "Yarımburgaz Spor Kulübü Başkanı Recai Şaz, makamında"
   },
 
+  /* Günün videosu (ana sayfa, puan durumunun altı). Yeni video için dosyayı media/ klasörüne,
+     kapak görselini images/ klasörüne koyup yolları değiştirin. Bloğu silerseniz bölüm gösterilmez. */
+  gununVideosu: {
+    baslik: "Günün videosu",
+    aciklama: "Minik futbolcumuzdan barajın üzerinden serbest vuruş golü.",
+    video: "media/gunun-videosu.mp4",
+    kapak: "images/gunun-videosu-kapak.jpg"
+  },
+
   /* Gol kralı bölümü. Rakamlar değişince yalnızca "rakamlar" satırlarını güncelleyin. */
   golKrali: {
     baslik: "U17 Gol Kralımız",
