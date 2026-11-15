@@ -7,7 +7,9 @@
   "use strict";
   var A = (window.KULUP || {}).sohbet;
   var kutu = document.getElementById("sohbet");
-  if (!kutu || !A || !A.acik) { if (kutu) kutu.hidden = true; return; }
+  var ac = document.getElementById("sohbet-ac");
+  if (!kutu || !ac) return;
+  if (!A || !A.acik) { kutu.hidden = true; ac.hidden = true; return; }
 
   var liste = document.getElementById("sohbet-liste");
   var form = document.getElementById("sohbet-form");
@@ -16,7 +18,26 @@
   var durum = document.getElementById("sohbet-durum");
   var rozet = document.getElementById("sohbet-rozet");
   var gonder = document.getElementById("sohbet-gonder");
-  var SINIR = 60, gorunen = {}, istemci = null;
+  var yeniRozet = document.getElementById("sohbet-yeni");
+  var SINIR = 60, gorunen = {}, istemci = null, ilkYukleme = true, okunmamis = 0;
+
+  /* Pencere: sağ alttaki düğmeyle açılır, × ile kapanır. Açık olup olmadığı sekme boyunca hatırlanır. */
+  function pencere(acik, odak) {
+    kutu.hidden = !acik; ac.hidden = acik;
+    ac.setAttribute("aria-expanded", acik ? "true" : "false");
+    try { sessionStorage.setItem("sohbet-acik", acik ? "1" : "0"); } catch (e) {}
+    if (acik) {
+      okunmamis = 0; yeniRozet.hidden = true;
+      liste.scrollTop = liste.scrollHeight;
+      if (odak) (adKutu.value.trim().length >= 2 ? mesajKutu : adKutu).focus();
+    } else if (odak) ac.focus();
+  }
+  ac.addEventListener("click", function () { pencere(true, true); });
+  document.getElementById("sohbet-kapat").addEventListener("click", function () { pencere(false, true); });
+  kutu.addEventListener("keydown", function (e) { if (e.key === "Escape") pencere(false, true); });
+  Array.prototype.forEach.call(document.querySelectorAll('a[href="#sohbet"]'), function (a) {
+    a.addEventListener("click", function (e) { e.preventDefault(); pencere(true, true); });
+  });
 
   function el(etiket, sinif, yazi) {
     var e = document.createElement(etiket);
@@ -50,6 +71,11 @@
     }
     liste.insertBefore(li, sonraki);
     gorunen[m.id] = li;
+    if (!ilkYukleme && kutu.hidden) {
+      okunmamis += 1; yeniRozet.hidden = false;
+      yeniRozet.textContent = okunmamis > 9 ? "9+" : String(okunmamis);
+      yeniRozet.setAttribute("aria-label", okunmamis + " yeni mesaj");
+    }
     while (liste.children.length > SINIR) { var ilk = liste.firstElementChild; delete gorunen[ilk.getAttribute("data-id")]; ilk.remove(); }
     if (kaydir) liste.scrollTop = liste.scrollHeight;
   }
@@ -73,7 +99,7 @@
 
   function baslat() {
     istemci = window.supabase.createClient(A.url, A.anahtar, { auth: { persistSession: false } });
-    esitle().then(function () { liste.scrollTop = liste.scrollHeight; durumYaz(""); })
+    esitle().then(function () { ilkYukleme = false; liste.scrollTop = liste.scrollHeight; durumYaz(""); })
       .catch(function () { durumYaz("Sohbet yüklenemedi. Bağlantınızı kontrol edip sayfayı yenileyin.", true); });
     istemci.channel("sohbet")
       .on("postgres_changes", { event: "INSERT", schema: "public", table: "sohbet_mesajlari" }, function (olay) { ekle(olay.new); })
@@ -106,6 +132,10 @@
       mesajKutu.value = ""; durumYaz(""); liste.scrollTop = liste.scrollHeight; mesajKutu.focus();
     });
   });
+
+  var hatirlanan = "0";
+  try { hatirlanan = sessionStorage.getItem("sohbet-acik") || "0"; } catch (e) {}
+  pencere(hatirlanan === "1" || location.hash === "#sohbet", false);
 
   /* Supabase kitaplığı yalnızca sohbet açıksa yüklenir */
   rozetYaz(false);
