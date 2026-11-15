@@ -7,66 +7,106 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <style>
-  /* Düzen: üstte sabit kırmızı çubuk (Kaydet her zaman görünür), altında açılır kapanır bölümler */
-  :root { --kirmizi: #d1261b; --kirmizi-koyu: #a51b12; --koyu: #242021; --zemin: #edeeef; --kart: #fff; --yazi: #242021; --yazi-2: #6a6566; --cizgi: #dcd9d9; --serit: #f5f4f4; color-scheme: light; }
+  /* Düzen: üstte ince kırmızı çubuk, ortada işe göre büyük kutular, altta her zaman görünen Kaydet çubuğu.
+     Bir kutuya basınca yalnızca o bölüm açılır; "Geri" ile kutulara dönülür. */
+  :root { --kirmizi: #d1261b; --kirmizi-koyu: #a51b12; --sari: #f6d21c; --koyu: #242021; --zemin: #edeeef; --kart: #fff; --yazi: #242021; --yazi-2: #6a6566; --cizgi: #dcd9d9; --serit: #f6f5f5; color-scheme: light; }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--zemin); color: var(--yazi); font: 400 1rem/1.5 "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-  header { position: sticky; top: 0; z-index: 10; background: var(--kirmizi); color: #fff; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; gap: 10px 16px; flex-wrap: wrap; }
-  header h1 { margin: 0; font-size: 1.1rem; }
-  header a { color: #fff; font-size: .92rem; }
-  .ust-dugmeler { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-  main { max-width: 900px; margin: 0 auto; padding: 20px; display: grid; gap: 14px; }
-  .kart { background: var(--kart); border-radius: 4px; padding: 20px; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
-  h2 { margin: 0 0 12px; font-size: 1.1rem; }
-  label { display: block; font-size: .88rem; font-weight: 600; margin-bottom: 4px; }
-  input[type="text"], input[type="number"], input[type="date"], input[type="email"], input[type="password"], textarea { font: inherit; padding: 9px 11px; border: 1px solid var(--cizgi); border-radius: 3px; width: 100%; background: #fff; color: var(--yazi); }
-  button { font: inherit; font-weight: 600; border: 0; border-radius: 3px; padding: 9px 16px; cursor: pointer; background: var(--kirmizi); color: #fff; }
+  body { margin: 0; background: var(--zemin); color: var(--yazi); font: 400 1.0625rem/1.5 "Segoe UI", Roboto, Helvetica, Arial, sans-serif; padding-bottom: 96px; }
+  header { background: var(--kirmizi); color: #fff; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; gap: 8px 16px; flex-wrap: wrap; }
+  header .marka { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+  header img { width: 34px; height: auto; }
+  header nav { display: flex; gap: 6px 18px; align-items: center; flex-wrap: wrap; font-size: .95rem; }
+  header a { color: #fff; }
+  header button { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.6); padding: 6px 12px; font-size: .95rem; }
+  header button:hover { background: rgba(255,255,255,.16); }
+  main { max-width: 920px; margin: 0 auto; padding: 22px 16px; display: grid; gap: 16px; }
+  #form { display: grid; gap: 16px; }
+  .baslik-satir { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  h1 { margin: 0; font-size: 1.6rem; line-height: 1.2; }
+  h2 { margin: 0 0 12px; font-size: 1.15rem; }
+  h3 { margin: 0; font-size: 1.1rem; }
+  .kart { background: var(--kart); border-radius: 6px; padding: 18px; box-shadow: 0 1px 2px rgba(0,0,0,.07); }
+  section.kart > h3 { margin-bottom: 14px; }
+
+  /* Ana ekran kutuları */
+  .kutular { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+  button.kutu { text-align: left; background: var(--kart); color: var(--yazi); border: 1px solid var(--cizgi); border-left: 6px solid var(--kirmizi); border-radius: 6px; padding: 16px 18px; display: grid; gap: 4px; font-weight: 400; min-height: 92px; align-content: center; }
+  button.kutu:hover { background: #fff7f6; border-color: var(--kirmizi); }
+  button.kutu strong { font-size: 1.15rem; }
+  button.kutu span { font-size: .9rem; color: var(--yazi-2); line-height: 1.35; }
+
+  /* Form alanları */
+  label { display: block; font-size: .92rem; font-weight: 600; margin-bottom: 5px; }
+  input[type="text"], input[type="number"], input[type="date"], input[type="email"], input[type="password"], textarea { font: inherit; padding: 11px 12px; border: 1px solid #bdb8b8; border-radius: 4px; width: 100%; background: #fff; color: var(--yazi); }
+  textarea { min-height: 96px; resize: vertical; }
+  .ipucu { display: block; margin-top: 5px; font-size: .84rem; color: var(--yazi-2); line-height: 1.35; }
+  .ipucu.hata { color: #9a5b00; font-weight: 600; }
+  .nesne { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px 16px; align-items: start; }
+  .nesne > .genis { grid-column: 1 / -1; }
+  fieldset { border: 1px solid var(--cizgi); border-radius: 6px; padding: 12px 14px 14px; margin: 0; min-width: 0; }
+  legend { font-weight: 700; font-size: .95rem; padding: 0 6px; }
+  .onay { display: flex; gap: 10px; align-items: center; font-weight: 500; margin: 0; padding: 8px 0; font-size: 1rem; }
+  .onay input { width: 22px; height: 22px; flex: none; }
+  details.gelismis { border-top: 1px dashed var(--cizgi); padding-top: 8px; }
+  details.gelismis > summary, details.adres > summary { cursor: pointer; font-size: .88rem; color: var(--yazi-2); padding: 4px 0; }
+  details.gelismis > .nesne { margin-top: 10px; }
+  details.adres { margin-top: 6px; }
+  details.adres input { margin-top: 6px; font-size: .88rem; }
+
+  /* Düğmeler */
+  button { font: inherit; font-weight: 600; border: 0; border-radius: 4px; padding: 10px 16px; cursor: pointer; background: var(--kirmizi); color: #fff; }
   button:hover { background: var(--kirmizi-koyu); }
-  button.ikincil { background: #f1efef; color: var(--yazi); border: 1px solid var(--cizgi); }
-  button.ikincil:hover { background: #e6e3e3; }
-  button.kucuk { padding: 5px 10px; font-size: .85rem; }
-  header button { background: #fff; color: var(--kirmizi-koyu); }
-  header button:hover { background: #ffe9a6; }
-  header button.ikincil { background: transparent; color: #fff; border-color: rgba(255,255,255,.6); }
-  button[disabled] { opacity: .55; cursor: default; }
-  :focus-visible { outline: 3px solid #f6d21c; outline-offset: 2px; }
-  .durum { margin: 0; font-size: .9rem; min-height: 1.4em; }
-  .durum.hata, small.hata { color: #9a5b00; font-weight: 600; }
-  header .durum { color: #fff; }
-  header .durum.hata { color: #ffe9a6; }
-  details.bolum { background: var(--kart); border-radius: 4px; box-shadow: 0 1px 2px rgba(0,0,0,.06); border-left: 5px solid var(--kirmizi); }
-  details.bolum > summary { cursor: pointer; padding: 14px 18px; font-weight: 700; }
-  details.bolum[open] > summary { border-bottom: 1px solid var(--cizgi); }
-  details.bolum > .nesne, details.bolum > fieldset { margin: 16px 18px 18px; }
-  .nesne { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px 16px; align-items: start; }
-  .nesne > fieldset, .nesne > .alan:has(textarea), .nesne > .alan:has(.yukle) { grid-column: 1 / -1; }
-  fieldset { border: 1px solid var(--cizgi); border-radius: 4px; padding: 12px 14px 14px; margin: 0; min-width: 0; }
-  legend { font-weight: 700; font-size: .9rem; padding: 0 6px; }
-  .onay { display: flex; gap: 8px; align-items: center; font-weight: 500; margin: 0; padding-top: 6px; }
-  .oge { background: var(--serit); border: 1px solid var(--cizgi); border-radius: 4px; padding: 12px; margin-bottom: 10px; display: grid; gap: 10px; }
-  .oge-ust { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .oge-ust strong { overflow-wrap: anywhere; }
+  button.ikincil { background: #fff; color: var(--yazi); border: 1px solid #bdb8b8; }
+  button.ikincil:hover { background: #f1efef; }
+  button.kucuk { padding: 7px 12px; font-size: .92rem; }
+  button.tehlike { color: var(--kirmizi-koyu); }
+  button[disabled] { opacity: .5; cursor: default; }
+  :focus-visible { outline: 3px solid var(--sari); outline-offset: 2px; box-shadow: 0 0 0 5px var(--koyu); }
+
+  /* Listeler */
+  .liste-ust { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  .oge { border: 1px solid var(--cizgi); border-radius: 6px; margin-bottom: 8px; background: var(--kart); }
+  .oge.acik { border-color: var(--kirmizi); box-shadow: 0 0 0 2px rgba(209,38,27,.15); }
+  .oge-ust { display: flex; justify-content: space-between; align-items: center; gap: 8px 12px; flex-wrap: wrap; padding: 10px 12px; }
+  .oge-ust strong { overflow-wrap: anywhere; font-weight: 600; flex: 1 1 200px; }
+  .oge-ust > input { flex: 1 1 220px; width: auto; }
+  .oge > .nesne { padding: 14px 12px 16px; border-top: 1px solid var(--cizgi); background: var(--serit); border-radius: 0 0 6px 6px; }
   .dugmeler { display: flex; gap: 6px; flex-wrap: wrap; }
-  .yukle { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
-  .yukle img.onizle { width: 64px; height: 64px; object-fit: cover; border-radius: 3px; border: 1px solid var(--cizgi); background: #fff; }
-  .yukle small { color: var(--yazi-2); }
-  p.bos { margin: 0 0 10px; color: var(--yazi-2); font-size: .9rem; }
-  .giris label { margin-top: 12px; }
-  .giris input { max-width: 360px; }
-  .giris button { margin-top: 16px; }
+  p.bos { margin: 0; color: var(--yazi-2); }
+
+  /* Görsel yükleme */
+  .yukle { display: flex; align-items: center; gap: 10px 12px; flex-wrap: wrap; }
+  .yukle img.onizle { width: 84px; height: 84px; object-fit: cover; border-radius: 4px; border: 1px solid var(--cizgi); background: #fff; }
+  .dosya-ad { font-size: .9rem; color: var(--yazi-2); overflow-wrap: anywhere; }
+  .dosya-ad:empty { display: none; }
+  .yukle .ipucu { flex-basis: 100%; margin-top: 0; }
+
+  /* Alttaki Kaydet çubuğu */
+  .alt-cubuk { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--koyu); color: #fff; padding: 12px 16px; box-shadow: 0 -4px 16px rgba(0,0,0,.2); }
+  .alt-cubuk-ic { max-width: 920px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 10px 16px; flex-wrap: wrap; }
+  .alt-cubuk button { font-size: 1.1rem; padding: 12px 34px; background: var(--sari); color: var(--koyu); }
+  .alt-cubuk button:hover { background: #fff; }
+  .durum { margin: 0; font-size: .95rem; min-height: 1.4em; }
+  .alt-cubuk .durum.uyari { color: var(--sari); font-weight: 600; }
+  .alt-cubuk .durum.tamam { color: #7be3a6; font-weight: 600; }
+  .alt-cubuk .durum.hata { color: #ffb4a8; font-weight: 600; }
+  .giris .durum.hata { color: #9a5b00; font-weight: 600; margin-top: 12px; }
+
+  .giris { max-width: 420px; width: 100%; margin: 24px auto 0; }
+  .giris label { margin-top: 14px; }
+  .giris button { margin-top: 18px; width: 100%; padding: 13px; font-size: 1.05rem; }
   [hidden] { display: none !important; }
+  @media (max-width: 560px) { h1 { font-size: 1.35rem; } .alt-cubuk button { flex: 1 1 100%; } }
 </style>
 </head>
 <body>
 <header>
-  <h1>Yarımburgaz Spor · Yönetim paneli</h1>
-  <div class="ust-dugmeler" id="panel" hidden>
-    <p class="durum" id="kayit-durum" role="status" aria-live="polite"></p>
-    <button type="button" id="kaydet" disabled>Kaydet</button>
-    <a href="sohbet-yonetim.html">Sohbet yönetimi</a>
+  <div class="marka"><img src="images/logo.png" alt=""><span>Yarımburgaz Spor · Yönetim paneli</span></div>
+  <nav id="ust-baglar" hidden>
     <a href="./" target="_blank" rel="noopener">Siteyi aç</a>
-    <button type="button" class="ikincil" id="cikis">Çıkış yap</button>
-  </div>
+    <a href="sohbet-yonetim.html">Sohbet yönetimi</a>
+    <button type="button" id="cikis">Çıkış yap</button>
+  </nav>
 </header>
 <main>
   <section class="kart giris" id="giris-kart">
@@ -76,14 +116,29 @@
       <input id="g-eposta" type="email" autocomplete="username" required>
       <label for="g-sifre">Şifre</label>
       <input id="g-sifre" type="password" autocomplete="current-password" required>
-      <div><button type="submit" id="g-dugme">Giriş yap</button></div>
+      <button type="submit" id="g-dugme">Giriş yap</button>
     </form>
     <p class="durum" id="giris-durum" role="status" aria-live="polite"></p>
   </section>
+
+  <div id="panel" hidden>
+    <div class="baslik-satir">
+      <button type="button" class="ikincil" id="geri" hidden>&larr; Geri</button>
+      <h1 id="ekran-baslik"></h1>
+    </div>
+  </div>
   <div id="form"></div>
 </main>
-<script src="js/data.js?v=1794752161"></script>
+
+<div class="alt-cubuk" id="alt-cubuk" hidden>
+  <div class="alt-cubuk-ic">
+    <p class="durum" id="kayit-durum" role="status" aria-live="polite"></p>
+    <button type="button" id="kaydet" disabled>Kaydet</button>
+  </div>
+</div>
+
+<script src="js/data.js?v=1794753872"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="js/admin.js?v=1794752161"></script>
+<script src="js/admin.js?v=1794753872"></script>
 </body>
 </html>
