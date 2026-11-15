@@ -295,3 +295,19 @@ form .dugme { justify-self: start; }
 .sp-uyari { font-size: .9rem; color: var(--yazi-2); border-left: 4px solid var(--cizgi); padding-left: 12px; }
 .sp-yazi .dugme { justify-self: start; }
 @media (max-width: 600px) { .sp-listeler { grid-template-columns: 1fr; } }
+
+/* Anma: tek renk, koyu ve sade. Kurdele siyah, ince açık çizgiyle koyu zeminde de seçilir. */
+.kurdele { width: 22px; height: 32px; fill: #0b0a0a; stroke: rgba(255,255,255,.75); stroke-width: 1; }
+.kurdele-bag { display: grid; place-items: center; padding: 4px; margin-right: auto; }
+.kurdele.buyuk { width: 44px; height: 62px; stroke: rgba(255,255,255,.55); }
+.anma { display: grid; grid-template-columns: 1fr minmax(0, 520px); gap: 36px; align-items: center; background: #161415; color: #ece8e8; border-radius: 3px; padding: 34px; border-top: 4px solid #000; }
+.anma-yazi { display: grid; gap: 10px; justify-items: start; }
+.anma h2 { font: 500 .85rem/1.2 var(--govde-yazi); letter-spacing: .22em; text-transform: uppercase; color: #b9b2b3; }
+.anma-isim { margin: 0; font: 700 clamp(2rem, 4.4vw, 3.2rem)/1.05 var(--baslik-yazi); color: #fff; }
+.anma-yazi p { margin: 0; max-width: 44ch; font-size: 1.08rem; }
+.anma-yazi #anma-satirlar { display: grid; gap: 6px; margin-top: 6px; }
+.anma-imza { margin-top: 10px !important; font-size: .9rem !important; color: #b9b2b3; }
+.anma video { width: 100%; height: auto; border-radius: 3px; background: #000; display: block; }
+@media (max-width: 980px) { .anma { grid-template-columns: 1fr; padding: 24px 18px; } }
+.anma .anma-isim { font: 700 clamp(2rem, 4.4vw, 3.2rem)/1.05 var(--baslik-yazi); max-width: none; }
+.kurdele.buyuk { box-sizing: content-box; padding: 12px 21px; background: #fff; border-radius: 50%; stroke: none; margin-bottom: 6px; }

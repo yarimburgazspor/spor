@@ -199,6 +199,21 @@
       $("haber-liste").appendChild(a);
     });
 
+  /* Anma bölümü ve menüdeki siyah kurdele */
+  (function () {
+    var A = K.anma;
+    if (!A) return;
+    $("anma").hidden = false;
+    $("kurdele-bag").hidden = false;
+    $("anma-baslik").textContent = A.baslik;
+    $("anma-isim").textContent = A.isimler;
+    A.satirlar.forEach(function (s) { $("anma-satirlar").appendChild(el("p", "", s)); });
+    $("anma-imza").textContent = A.imza;
+    var v = $("anma-video");
+    v.src = A.video; v.poster = A.kapak;
+    v.setAttribute("aria-label", A.videoAciklama);
+  })();
+
   /* Slider'ın yanındaki görsel */
   if (K.yanResim && K.yanResim.dosya) {
     $("yan-resim").src = K.yanResim.dosya; $("yan-resim").alt = K.yanResim.aciklama;

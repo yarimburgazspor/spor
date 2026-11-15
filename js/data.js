@@ -125,6 +125,22 @@ window.KULUP = {
     { takim: "İstanbul Kiraç Spor Kulübü", G: 0, B: 0, M: 6 }
   ],
 
+  /* Anma bölümü. Metinler kulübün anma videosundan alınmıştır. Bölümü kaldırmak için
+     bu bloğu silin; menüdeki siyah kurdele de kendiliğinden kalkar. */
+  anma: {
+    baslik: "Acı kaybımız",
+    isimler: "Ahmet Efe & Ahmet Çalık",
+    satirlar: [
+      "Bazı insanlar aramızdan ayrılsa da kalbimizden asla ayrılmaz.",
+      "İki güzel insan, tek bir gökyüzü.",
+      "Unutulmadınız, unutulmayacaksınız."
+    ],
+    imza: "Yarımburgaz Spor ailesi",
+    video: "media/anma.mp4",
+    kapak: "images/anma-kapak.jpg",
+    videoAciklama: "Ahmet Efe ve Ahmet Çalık anısına hazırlanan video"
+  },
+
   /* Sponsorluk bölümü. Metinler kulübün sponsorluk afişinden alınmıştır. */
   sponsorluk: {
     baslik: "Sponsorluk",
