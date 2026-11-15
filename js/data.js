@@ -188,7 +188,9 @@ window.KULUP = {
   /* U17 KADROMUZ
      Her oyuncu için bir satır: { no: 11, ad: "Ad Soyad", mevki: "Forvet", dogumYili: 2010, foto: "images/kadro/11.jpg" }
      - no: forma numarası; bilinmiyorsa null yazın.
-     - mevki: "Kaleci", "Defans", "Orta saha" ya da "Forvet"; bilinmiyorsa "" bırakın.
+     - mevki: "Kaleci", "Sol bek", "Stoper", "Sağ bek", "Orta saha", "Ofansif orta saha", "Sol forvet",
+       "Santrfor", "Sağ forvet" gibi; bilinmiyorsa "" bırakın. Saha dizilişi bu yazıya göre kurulur.
+     - ilk11: true olan oyuncular sahada dizilir. yedek: true olanlar sahanın altında "Yedekler"de listelenir.
      - dogumYili: yalnızca yıl. Oyuncular reşit olmadığı için tam doğum tarihi sitede yayınlanmaz.
      - foto: boşsa forma numaralı (ya da baş harfli) yer tutucu gösterilir. Fotoğraf dikey (3:4) olmalı;
        dosyayı images/kadro/ klasörüne koyup yolunu buraya yazın. */
@@ -196,32 +198,32 @@ window.KULUP = {
   teknikDirektor: "",
   kadroNot: "",
   kadro: [
-    { no: null, ad: "Yasin Aksu", mevki: "", dogumYili: 2010, foto: "" },
+    { no: 3, ad: "Yasin Aksu", mevki: "Sol bek", ilk11: true, dogumYili: 2010, foto: "" },
     { no: null, ad: "Mustafa Dönmez", mevki: "", dogumYili: 2010, foto: "" },
     { no: null, ad: "Mustafa Çakmak", mevki: "", dogumYili: 2010, foto: "" },
     { no: null, ad: "Süleyman Teymur", mevki: "", dogumYili: 2010, foto: "" },
-    { no: null, ad: "Ömürcan Özer", mevki: "", dogumYili: 2010, foto: "" },
-    { no: null, ad: "Hazar Çapan", mevki: "", dogumYili: 2010, foto: "" },
-    { no: null, ad: "Muhammed Çelik", mevki: "", dogumYili: 2010, foto: "" },
+    { no: 41, ad: "Ömürcan Özer", mevki: "Kaleci", ilk11: true, dogumYili: 2010, foto: "" },
+    { no: 8, ad: "Hazar Çapan", mevki: "Orta saha", ilk11: true, dogumYili: 2010, foto: "" },
+    { no: 18, ad: "Muhammed Çelik", mevki: "", yedek: true, dogumYili: 2010, foto: "" },
     { no: null, ad: "Cihat Duran", mevki: "", dogumYili: 2010, foto: "" },
-    { no: 11, ad: "Muhammed Can Ceylan", mevki: "", dogumYili: 2010, foto: "" },
-    { no: null, ad: "Harun Hanedar", mevki: "", dogumYili: 2010, foto: "" },
+    { no: 11, ad: "Muhammed Can Ceylan", mevki: "Sol forvet", ilk11: true, dogumYili: 2010, foto: "" },
+    { no: 9, ad: "Harun Hanedar", mevki: "Sağ forvet", ilk11: true, dogumYili: 2010, foto: "" },
     { no: null, ad: "Ömer Faruk Polat", mevki: "", dogumYili: 2010, foto: "" },
-    { no: null, ad: "Mert Dönmez", mevki: "", dogumYili: 2010, foto: "" },
-    { no: null, ad: "Olcay Kamacı", mevki: "", dogumYili: 2010, foto: "" },
-    { no: null, ad: "Arif Hamza Özen", mevki: "", dogumYili: 2010, foto: "" },
+    { no: 4, ad: "Mert Dönmez", mevki: "Stoper", ilk11: true, dogumYili: 2010, foto: "" },
+    { no: 31, ad: "Olcay Kamacı", mevki: "Ofansif orta saha", ilk11: true, dogumYili: 2010, foto: "" },
+    { no: 14, ad: "Arif Hamza Özen", mevki: "Sağ bek", ilk11: true, dogumYili: 2010, foto: "" },
     { no: null, ad: "Kerem Güngör", mevki: "", dogumYili: 2010, foto: "" },
     { no: null, ad: "Muhammed Ali Çetin", mevki: "", dogumYili: 2010, foto: "" },
-    { no: null, ad: "Berat Yıldız", mevki: "", dogumYili: 2010, foto: "" },
-    { no: null, ad: "Çetin Can Uğur", mevki: "", dogumYili: 2010, foto: "" },
-    { no: null, ad: "Muhammed Taha Artuç", mevki: "", dogumYili: 2010, foto: "" },
+    { no: 5, ad: "Berat Yıldız", mevki: "Stoper", ilk11: true, dogumYili: 2010, foto: "" },
+    { no: 17, ad: "Çetin Can Uğur", mevki: "", yedek: true, dogumYili: 2010, foto: "" },
+    { no: 29, ad: "Muhammed Taha Artuç", mevki: "", yedek: true, dogumYili: 2010, foto: "" },
     { no: null, ad: "Ümeyir Tiz", mevki: "", dogumYili: 2011, foto: "" },
-    { no: null, ad: "Alperen Polat", mevki: "", dogumYili: 2011, foto: "" },
+    { no: 36, ad: "Alperen Polat", mevki: "", yedek: true, dogumYili: 2011, foto: "" },
     { no: null, ad: "Halit Zalat", mevki: "", dogumYili: 2011, foto: "" },
-    { no: null, ad: "Mustafa Can Gülbeyaz", mevki: "", dogumYili: 2011, foto: "" },
-    { no: null, ad: "Mehmet Reşit Duran", mevki: "", dogumYili: 2011, foto: "" },
+    { no: 66, ad: "Mustafa Can Gülbeyaz", mevki: "", yedek: true, dogumYili: 2011, foto: "" },
+    { no: 72, ad: "Mehmet Reşit Duran", mevki: "Orta saha", ilk11: true, dogumYili: 2011, foto: "" },
     { no: null, ad: "Ahmet Efe Kalkanbaş", mevki: "", dogumYili: 2011, foto: "" },
-    { no: null, ad: "Muhammed Emir Bozdağ", mevki: "", dogumYili: 2011, foto: "" },
+    { no: 19, ad: "Muhammed Emir Bozdağ", mevki: "", yedek: true, dogumYili: 2011, foto: "" },
     { no: null, ad: "Muhammet Ali Gülbetekin", mevki: "", dogumYili: 2011, foto: "" },
     { no: null, ad: "Bünyamin Tekdemir", mevki: "", dogumYili: 2011, foto: "" },
     { no: null, ad: "Yiğit Ali Polat", mevki: "", dogumYili: null, foto: "" }

@@ -422,3 +422,16 @@ form .dugme { justify-self: start; }
   .saha-cizim::after { width: 160px; height: 56px; margin-left: -80px; }
   .saha-cizim::before { width: 90px; height: 90px; margin: -45px 0 0 -45px; }
 }
+
+/* Yedekler listesi (saha dizilişinin altında) */
+.yedekler { margin-top: 14px; background: var(--serit); border-left: 5px solid var(--kirmizi); padding: 14px 18px; }
+.yedekler h2 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 10px; }
+.yedekler ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: .92rem; }
+.yedekler li span { display: inline-block; min-width: 26px; margin-right: 6px; font: 700 1.1rem/1 var(--baslik-yazi); color: var(--vurgu); font-variant-numeric: tabular-nums; text-align: right; }
+.saha-cizim { grid-template-rows: none; }
+
+@media (max-width: 600px) {
+  .hat { flex-wrap: nowrap; gap: 4px; }
+  .saha-oyuncu { width: 72px; min-width: 0; flex: 0 1 72px; }
+  .saha-oyuncu small { font-size: .6rem; padding: 1px 4px; }
+}
