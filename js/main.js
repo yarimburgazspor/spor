@@ -124,6 +124,30 @@
     $("maclar").appendChild(li);
   });
 
+  /* Kayan sonuç bandı: en yeni maç başta. Kesintisiz dönmesi için liste iki kez yazılır;
+     ikinci kopya ekran okuyuculardan gizlenir. Veriler canlı değildir, fikstur listesinden gelir. */
+  (function () {
+    var serit = $("bant-serit");
+    var oynanan = maclar.filter(function (m) { return m.skor; }).reverse();
+    if (!oynanan.length) { $("bant").hidden = true; return; }
+    $("bant-etiket").textContent = "Maç sonuçları";
+    [false, true].forEach(function (kopya) {
+      var grup = el("div", "bant-grup");
+      if (kopya) grup.setAttribute("aria-hidden", "true");
+      oynanan.forEach(function (m) {
+        var s = m.skor.split("-");
+        var b = el("span", "bant-mac");
+        b.appendChild(el("span", "bant-lig", K.takim + " · " + m.hafta + ". hafta"));
+        b.appendChild(el("span", bizMi(m.ev) ? "biz" : "", m.ev));
+        b.appendChild(el("strong", "", s[0] + " - " + s[1]));
+        b.appendChild(el("span", bizMi(m.konuk) ? "biz" : "", m.konuk));
+        grup.appendChild(b);
+      });
+      serit.appendChild(grup);
+    });
+    serit.style.animationDuration = Math.max(20, oynanan.length * 7) + "s";
+  })();
+
   /* Sıradaki maç kutusu: maç saati geçtiyse geri sayım yerine "sonuç bekleniyor" yazar */
   var kutu = $("siradaki");
   if (siradaki) {

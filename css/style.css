@@ -311,3 +311,26 @@ form .dugme { justify-self: start; }
   .gk-ic { grid-template-columns: 1fr; gap: 24px; }
   .gk-resim { max-width: 460px; margin: 0 auto; }
 }
+
+/* --- Kayan sonuç bandı --- */
+.bant { display: flex; align-items: stretch; background: var(--kirmizi-koyu); color: #fff; border-bottom: 3px solid var(--sari); font-size: .92rem; }
+.bant[hidden] { display: none; }
+.bant-etiket { flex: none; display: flex; align-items: center; padding: 0 22px 0 20px; background: var(--koyu); font: 700 1rem/1 var(--baslik-yazi); letter-spacing: .08em; text-transform: uppercase; font-style: italic; clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%); }
+.bant-pencere { flex: 1; min-width: 0; overflow: hidden; }
+.bant-serit { display: flex; width: max-content; animation: bant-kay 42s linear infinite; }
+.bant:hover .bant-serit, .bant:focus-within .bant-serit { animation-play-state: paused; }
+.bant-grup { display: flex; flex: none; }
+.bant-mac { display: inline-flex; align-items: center; gap: 10px; padding: 9px 26px; white-space: nowrap; border-right: 1px solid rgba(255,255,255,.3); }
+.bant-lig { font-size: .7rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; background: #fff; color: var(--kirmizi-koyu); padding: 2px 7px; border-radius: 3px; }
+.bant-mac strong { font: 700 1.25rem/1 var(--baslik-yazi); font-variant-numeric: tabular-nums; color: var(--sari); }
+.bant-mac .biz { font-weight: 600; }
+@keyframes bant-kay { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .bant-serit { animation: none; }
+  .bant-pencere { overflow-x: auto; }
+  .bant-grup[aria-hidden="true"] { display: none; }
+}
+@media (max-width: 560px) {
+  .bant-etiket { padding: 0 18px 0 12px; font-size: .85rem; }
+  .bant-mac { padding: 8px 16px; gap: 8px; }
+}
