@@ -22,7 +22,7 @@
   $("sayfa-baslik").textContent = K.ad;
   $("marka-ad").textContent = K.kisaAd;
   $("marka-alt").textContent = K.kurulus + " · " + K.renkler;
-  $("alt-ad").textContent = K.ad + ", " + K.kurulus + " yılında kuruldu. Renkleri " + K.renkler.toLowerCase().replace(" - ", "-") + ".";
+  $("alt-ad").textContent = K.ad + ", " + K.kurulus + " yılında kuruldu. Renkleri " + K.renkler.toLowerCase().replace(" - ", "-") + "." + (K.ilce ? " " + K.ilce + "." : "");
   $("alt-yazi").textContent = "© " + new Date().getFullYear() + " " + K.ad;
   $("ornek-uyari").hidden = !K.ornekIcerik;
   disBaglanti($("yan-instagram"), K.instagram);
@@ -260,6 +260,12 @@
       $("kadro-liste").appendChild(d);
     });
   }
+
+  /* Kulüp bilgileri */
+  (K.kulupBilgi || []).forEach(function (b) {
+    var d = el("div"); d.appendChild(el("dt", "", b.etiket)); d.appendChild(el("dd", "", b.deger));
+    $("kulup-bilgi").appendChild(d);
+  });
 
   /* Saha */
   K.sahalar.forEach(function (s) {

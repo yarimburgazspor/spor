@@ -20,6 +20,18 @@ window.KULUP = {
   instagram: "https://www.instagram.com/yarimburgaz.spor/",
   instagramAd: "@yarimburgaz.spor",
 
+  /* Federasyon kayıtlarındaki kulüp bilgileri. "Takımımız" bölümünde gösterilir. */
+  kulupBilgi: [
+    { etiket: "Resmi adı", deger: "Öz Yarımburgaz Spor" },
+    { etiket: "Kulüp kodu", deger: "17016" },
+    { etiket: "Başkan", deger: "Recai Şaz" },
+    { etiket: "İl", deger: "İstanbul" },
+    { etiket: "İlçe", deger: "Küçükçekmece" },
+    { etiket: "Kuruluş", deger: "2012" },
+    { etiket: "Renkler", deger: "Kırmızı - Sarı" }
+  ],
+  ilce: "Küçükçekmece / İstanbul",
+
   takim: "U17",
   lig: "U17 B Ligi",
   grup: "7. Grup",

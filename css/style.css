@@ -276,3 +276,9 @@ form .dugme { justify-self: start; }
   .panel-bas { padding: 14px 16px; }
   .panel-ic, .gk-ic { padding: 16px; }
 }
+
+/* Kulüp bilgileri */
+.bilgi { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; margin: 0; background: var(--cizgi); border: 1px solid var(--cizgi); }
+.bilgi div { background: var(--kart); padding: 12px 16px; }
+.bilgi dt { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--yazi-2); }
+.bilgi dd { margin: 2px 0 0; font-weight: 600; }
