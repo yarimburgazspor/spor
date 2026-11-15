@@ -492,3 +492,8 @@ form .dugme { justify-self: start; }
   .ho-liste li { grid-template-columns: 1fr; justify-items: center; text-align: center; padding: 8px; border-left: 0; border-top: 4px solid var(--sari); }
   .ho-foto { width: 100%; max-width: 110px; }
 }
+
+/* Haftanın oyuncuları: fotoğraf gelene kadar oyuncu silueti */
+.ho-foto { background: linear-gradient(160deg, var(--kirmizi) 0%, var(--kirmizi-koyu) 100%); }
+.ho-foto .siluet { width: 100%; height: 100%; display: block; fill: rgba(255,255,255,.88); }
+.ho-foto .siluet path { fill: var(--sari); }
