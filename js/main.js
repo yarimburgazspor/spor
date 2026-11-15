@@ -234,18 +234,10 @@
       var kare = el("div", "ho-foto");
       if (o.foto) { var img = el("img"); img.src = o.foto; img.alt = o.ad || ""; img.loading = "lazy"; kare.appendChild(img); }
       else {
-        /* Fotoğraf yokken: forma giymiş oyuncu silueti */
+        /* Fotoğraf yokken: futbolcu silueti */
         kare.setAttribute("aria-hidden", "true");
-        var ns = "http://www.w3.org/2000/svg", svg = document.createElementNS(ns, "svg");
-        svg.setAttribute("viewBox", "0 0 96 96"); svg.setAttribute("class", "siluet");
-        [["circle", { cx: 48, cy: 30, r: 15 }],
-         ["path", { d: "M48 49c-9 0-15 2-21 6l-13 9 6 14 9-4v22h38V74l9 4 6-14-13-9c-6-4-12-6-21-6z" }]
-        ].forEach(function (s) {
-          var o = document.createElementNS(ns, s[0]);
-          Object.keys(s[1]).forEach(function (k) { o.setAttribute(k, s[1][k]); });
-          svg.appendChild(o);
-        });
-        kare.appendChild(svg);
+        var sil = el("img", "siluet"); sil.src = "images/oyuncu-siluet.png"; sil.alt = "";
+        kare.appendChild(sil);
       }
       li.appendChild(kare);
       var yazi = el("div", "ho-yazi");
