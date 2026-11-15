@@ -38,8 +38,6 @@
     $("tasarim").appendChild(ta);
   }
   $("ornek-uyari").hidden = !K.ornekIcerik;
-  disBaglanti($("yan-instagram"), K.instagram);
-  $("yan-instagram").setAttribute("aria-label", "Instagram: " + K.instagramAd);
   Array.prototype.forEach.call(document.querySelectorAll(".kaynak-dugme"), function (a) { disBaglanti(a, K.ligKaynak.url); });
 
   var maclar = K.fikstur.slice().sort(function (a, b) { return a.hafta - b.hafta; });
@@ -68,22 +66,24 @@
     serit.style.animationDuration = Math.max(20, oynanan.length * 7) + "s";
   })();
 
-  /* Büyük slider: 5 saniyede bir geçer; oklar, noktalar ve kaydırma ile de değişir */
+  /* Büyük slider: 5 saniyede bir geçer; oklar, noktalar ve kaydırma ile de değişir.
+     Fotoğraflar gruplar hâlinde gelir; alttaki başlık ve yazı, görünen fotoğrafın grubuna göre değişir. */
   (function () {
-    var S = K.slider, kutu = $("vitrin");
-    if (!S || !S.resimler.length) { kutu.hidden = true; return; }
-    $("vitrin-baslik").textContent = S.baslik;
-    $("vitrin-aciklama").textContent = S.yazi;
+    var S = K.slider, kutu = $("vitrin"), slaytlar = [];
+    ((S && S.gruplar) || []).forEach(function (g) {
+      g.resimler.forEach(function (r) { slaytlar.push({ r: r, baslik: g.baslik, yazi: g.yazi }); });
+    });
+    if (!slaytlar.length) { kutu.hidden = true; return; }
     var cerceve = $("vitrin-cerceve"), kareler = [], noktalar = [], aktif = 0, zamanlayici = null;
-    S.resimler.forEach(function (r, i) {
+    slaytlar.forEach(function (sl, i) {
       var f = el("figure", i === 0 ? "aktif" : "");
-      var img = el("img"); img.src = r.dosya; img.alt = r.aciklama;
-      if (r.odak) img.style.objectPosition = r.odak;
+      var img = el("img"); img.src = sl.r.dosya; img.alt = sl.r.aciklama;
+      if (sl.r.odak) img.style.objectPosition = sl.r.odak;
       if (i > 0) img.loading = "lazy";
       f.appendChild(img);
       cerceve.appendChild(f); kareler.push(f);
       var n = el("button"); n.type = "button";
-      n.setAttribute("aria-label", (i + 1) + ". fotoğraf: " + r.aciklama);
+      n.setAttribute("aria-label", (i + 1) + ". fotoğraf: " + sl.r.aciklama);
       n.addEventListener("click", function () { durdur(); goster(i); });
       $("vitrin-noktalar").appendChild(n); noktalar.push(n);
     });
@@ -91,6 +91,8 @@
       aktif = (n + kareler.length) % kareler.length;
       kareler.forEach(function (f, i) { f.className = i === aktif ? "aktif" : ""; });
       noktalar.forEach(function (d, i) { d.setAttribute("aria-current", i === aktif ? "true" : "false"); });
+      $("vitrin-baslik").textContent = slaytlar[aktif].baslik;
+      $("vitrin-aciklama").textContent = slaytlar[aktif].yazi;
     }
     function durdur() { clearInterval(zamanlayici); zamanlayici = null; }
     function baslat() {

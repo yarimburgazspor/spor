@@ -357,8 +357,8 @@ form .dugme { justify-self: start; }
 }
 
 /* Instagram yerleştirmesi */
-.ig-ic { padding: 22px; display: grid; justify-items: center; }
-.ig-ic .instagram-media { margin: 0 auto !important; max-width: 540px; width: 100%; }
+.ig-ic { padding: 14px; display: grid; justify-items: center; }
+.ig-ic .instagram-media { margin: 0 auto !important; max-width: 540px; min-width: 0 !important; width: 100% !important; }
 .ig-ic blockquote:not([class*="rendered"]) { border: 1px solid var(--cizgi); border-radius: 3px; padding: 22px; text-align: center; background: var(--serit); }
 
 /* Puan durumunun altındaki düğme ve Instagram simgesi */

@@ -45,13 +45,30 @@ window.KULUP = {
   /* Sayfanın ortasındaki fotoğraf slider'ı. Yeni fotoğraf için dosyayı images/
      klasörüne koyup listeye bir satır ekleyin. */
   slider: {
-    baslik: "ŞAMPİYONLUK MEŞALESİ YANDI!",
-    yazi: "Grubun iddialı ekiplerinden Ferahevler'i 6-1 yendik. Altı maçta altı galibiyetle 7. Grup'un zirvesindeyiz.",
-    resimler: [
-      /* odak: geniş çerçevede fotoğrafın hangi bölümünün görüneceği (yatay dikey) */
-      { dosya: "images/sampiyonluk-1-takim.jpg", aciklama: "Maç öncesi takım fotoğrafı, İFA Spor Stadyumu", odak: "50% 70%" },
-      { dosya: "images/sampiyonluk-2-soyunma-odasi.jpg", aciklama: "Maç sonrası soyunma odasında galibiyet sevinci", odak: "50% 66%" },
-      { dosya: "images/sampiyonluk-3-kenar.jpg", aciklama: "Kenarda maçı izleyen antrenörümüz", odak: "50% 40%" }
+    /* Her grubun kendi başlığı ve yazısı vardır; grubun fotoğrafları gösterilirken o başlık görünür.
+       odak: geniş çerçevede fotoğrafın hangi bölümünün görüneceği (yatay dikey). */
+    gruplar: [
+      {
+        baslik: "ŞAMPİYONLUK MEŞALESİ YANDI!",
+        yazi: "Grubun iddialı ekiplerinden Ferahevler'i 6-1 yendik. Altı maçta altı galibiyetle 7. Grup'un zirvesindeyiz.",
+        resimler: [
+          { dosya: "images/sampiyonluk-1-takim.jpg", aciklama: "Maç öncesi takım fotoğrafı, İFA Spor Stadyumu", odak: "50% 70%" },
+          { dosya: "images/sampiyonluk-2-soyunma-odasi.jpg", aciklama: "Maç sonrası soyunma odasında galibiyet sevinci", odak: "50% 66%" },
+          { dosya: "images/sampiyonluk-3-kenar.jpg", aciklama: "Kenarda maçı izleyen antrenörümüz", odak: "50% 40%" }
+        ]
+      },
+      {
+        baslik: "U19 TAKIMIMIZ SEZON HAZIRLIKLARINA DEVAM EDİYOR!",
+        yazi: "U19 takımımız yağmurlu havaya rağmen antrenmanlarını sürdürüyor.",
+        resimler: [
+          { dosya: "images/u19-hazirlik-1.jpg", aciklama: "U19 takımı yağmur altında antrenman sonrası toplu fotoğrafta", odak: "50% 80%" },
+          { dosya: "images/u19-hazirlik-2.jpg", aciklama: "Yağmur altında çift kale antrenman maçı", odak: "50% 62%" },
+          { dosya: "images/u19-hazirlik-3.jpg", aciklama: "Sırtında Öz Yarımburgaz Spor yazan antrenman yeleğiyle bir oyuncu", odak: "50% 100%" },
+          { dosya: "images/u19-hazirlik-4.jpg", aciklama: "Turuncu ve yeşil yelekli oyuncular pas çalışmasında", odak: "50% 62%" },
+          { dosya: "images/u19-hazirlik-5.jpg", aciklama: "Orta sahada top mücadelesi", odak: "50% 62%" },
+          { dosya: "images/u19-hazirlik-6.jpg", aciklama: "İstanbul Büyükşehir Belediyesi 100. Yıl Stadı'nda ısınma", odak: "50% 58%" }
+        ]
+      }
     ]
   },
 
