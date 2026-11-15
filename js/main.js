@@ -225,6 +225,24 @@
     v.setAttribute("aria-label", A.videoAciklama);
   })();
 
+  /* Haftanın oyuncuları: üç kart. Adı girilmemiş kart "Yakında açıklanacak" olarak görünür. */
+  if (K.haftaninOyunculari && varMi("haftanin-oyunculari")) {
+    $("haftanin-oyunculari").hidden = false;
+    $("ho-baslik").textContent = K.haftaninOyunculari.baslik;
+    K.haftaninOyunculari.oyuncular.forEach(function (o, i) {
+      var li = el("li", o.ad ? "" : "bos");
+      var kare = el("div", "ho-foto");
+      if (o.foto) { var img = el("img"); img.src = o.foto; img.alt = o.ad || ""; img.loading = "lazy"; kare.appendChild(img); }
+      else { kare.setAttribute("aria-hidden", "true"); kare.appendChild(el("span", "", String(i + 1))); }
+      li.appendChild(kare);
+      var yazi = el("div", "ho-yazi");
+      yazi.appendChild(el("strong", "", o.ad || "Yakında açıklanacak"));
+      if (o.not) yazi.appendChild(el("small", "", o.not));
+      li.appendChild(yazi);
+      $("ho-liste").appendChild(li);
+    });
+  }
+
   /* Günün videosu */
   if (K.gununVideosu && varMi("gunun-videosu")) {
     $("gunun-videosu").hidden = false;

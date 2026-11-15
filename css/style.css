@@ -474,3 +474,21 @@ form .dugme { justify-self: start; }
 .gv-ic { padding: 14px; display: grid; gap: 10px; justify-items: center; }
 .gv-ic video { width: 100%; max-width: 330px; height: auto; aspect-ratio: 9 / 16; border-radius: 3px; background: #000; display: block; }
 .gv-ic p { margin: 0; font-size: .92rem; text-align: center; color: var(--yazi-2); }
+
+/* Sol sütun: slider ve altında haftanın oyuncuları */
+.sol-sutun { display: grid; gap: 16px; align-content: start; min-width: 0; }
+.panel-bas.ince { padding: 12px 18px; }
+.ho-liste { list-style: none; margin: 0; padding: 14px 18px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.ho-liste li { display: grid; grid-template-columns: 96px 1fr; gap: 12px; align-items: center; background: var(--serit); border-radius: 3px; border-left: 4px solid var(--sari); padding: 10px; min-width: 0; }
+.ho-foto { width: 96px; aspect-ratio: 1 / 1; border-radius: 3px; overflow: hidden; background: var(--koyu); display: grid; place-items: center; }
+.ho-foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+.ho-foto span { font: 700 2.6rem/1 var(--baslik-yazi); color: rgba(246,210,28,.85); }
+.ho-yazi { min-width: 0; }
+.ho-yazi strong { display: block; font: 700 1.15rem/1.15 var(--baslik-yazi); text-transform: uppercase; overflow-wrap: anywhere; }
+.ho-yazi small { display: block; margin-top: 4px; font-size: .8rem; color: var(--yazi-2); line-height: 1.3; }
+.ho-liste li.bos .ho-yazi strong { font: 500 .85rem/1.3 var(--govde-yazi); text-transform: none; color: var(--yazi-2); }
+@media (max-width: 760px) {
+  .ho-liste { gap: 8px; padding: 12px; }
+  .ho-liste li { grid-template-columns: 1fr; justify-items: center; text-align: center; padding: 8px; border-left: 0; border-top: 4px solid var(--sari); }
+  .ho-foto { width: 100%; max-width: 110px; }
+}

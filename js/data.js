@@ -86,6 +86,18 @@ window.KULUP = {
     resimAciklama: "Yarımburgaz Spor Kulübü Başkanı Recai Şaz, makamında"
   },
 
+  /* Haftanın oyuncuları (ana sayfa, slider'ın altı). Üç oyuncu için birer satır.
+     ad boşsa kartta "Yakında açıklanacak" yazar; foto boşsa yer tutucu görünür.
+     Fotoğraf kare ya da dikey olabilir; dosyayı images/ klasörüne koyup yolunu yazın. */
+  haftaninOyunculari: {
+    baslik: "Haftanın oyuncuları",
+    oyuncular: [
+      { ad: "", not: "", foto: "" },
+      { ad: "", not: "", foto: "" },
+      { ad: "", not: "", foto: "" }
+    ]
+  },
+
   /* Günün videosu (ana sayfa, puan durumunun altı). Yeni video için dosyayı media/ klasörüne,
      kapak görselini images/ klasörüne koyup yolları değiştirin. Bloğu silerseniz bölüm gösterilmez. */
   gununVideosu: {
