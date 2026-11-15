@@ -41,6 +41,21 @@ window.KULUP = {
     ]
   },
 
+  /* Gol kralı bölümü. Rakamlar değişince yalnızca "rakamlar" satırlarını güncelleyin. */
+  golKrali: {
+    baslik: "U17 Gol Kralımız",
+    ad: "Muhammed Can Ceylan",
+    forma: 11,
+    unvan: "U17 B Ligi · 7. Grup gol kralı",
+    rakamlar: [
+      { deger: "5", etiket: "Maç" },
+      { deger: "8", etiket: "Gol" },
+      { deger: "5", etiket: "Asist" }
+    ],
+    resim: "images/gol-krali.jpg",
+    resimAciklama: "Muhammed Can Ceylan, 11 numaralı formasıyla: U17 B Ligi 7. Grup gol kralı, 5 maç, 8 gol, 5 asist"
+  },
+
   /* kategori: "u17" veya "kulup" (haber filtreleri bunu kullanır) */
   haberler: [
     { tarih: "2026-11-14", kategori: "u17", etiket: "#U17",

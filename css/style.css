@@ -66,7 +66,7 @@ h3 { font-size: 1.4rem; }
 .marka img { width: 52px; flex: none; filter: drop-shadow(0 1px 2px rgba(0,0,0,.35)); }
 .marka strong { display: block; font: 700 1.6rem/1 var(--baslik-yazi); text-transform: uppercase; letter-spacing: .02em; }
 .marka small { display: block; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; margin-top: 3px; color: #ffe9a6; }
-.ust nav { display: flex; align-items: center; gap: 4px 20px; flex-wrap: wrap; }
+.ust nav { display: flex; align-items: center; gap: 4px 16px; flex-wrap: wrap; }
 .ust nav a:not(.dugme) { color: #fff; text-decoration: none; font: 600 1.05rem/1 var(--baslik-yazi); letter-spacing: .04em; text-transform: uppercase; padding: 8px 0; border-bottom: 3px solid transparent; }
 .ust nav a:not(.dugme):hover { border-bottom-color: var(--sari); }
 
@@ -292,4 +292,22 @@ form .dugme { justify-self: start; }
   .vitrin-ic { grid-template-columns: 1fr; gap: 24px; }
   .vitrin-cerceve { max-width: 460px; width: 100%; margin: 0 auto; }
   .vitrin { padding: 36px 0; }
+}
+
+/* --- Gol kralı --- */
+#gol-krali[hidden] { display: none; }
+.gk-ic { display: grid; grid-template-columns: minmax(0, 440px) 1fr; gap: 44px; align-items: center; }
+.gk-resim { width: 100%; border-radius: 8px; box-shadow: 0 14px 32px rgba(0,0,0,.22); }
+.gk-ad { display: flex; align-items: center; gap: 16px; margin: 0 0 6px; }
+.gk-ad span { font: 700 3.4rem/1 var(--baslik-yazi); color: var(--vurgu); font-variant-numeric: tabular-nums; }
+.gk-ad strong { font: 700 clamp(1.9rem, 4vw, 2.8rem)/1.05 var(--baslik-yazi); text-transform: uppercase; }
+.gk-unvan { margin: 0 0 24px; color: var(--yazi-2); font-weight: 500; }
+.gk-rakamlar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0; max-width: 460px; }
+.gk-rakamlar div { display: flex; flex-direction: column-reverse; background: var(--kart); border: 1px solid var(--cizgi); border-bottom: 5px solid var(--sari); border-radius: 6px; padding: 16px 14px; text-align: center; }
+.gk-rakamlar dd { margin: 0; font: 700 3rem/1 var(--baslik-yazi); color: var(--vurgu); font-variant-numeric: tabular-nums; }
+.gk-rakamlar dt { font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--yazi-2); margin-top: 6px; }
+.bolum-cizgi { border-top: 1px solid var(--cizgi); }
+@media (max-width: 920px) {
+  .gk-ic { grid-template-columns: 1fr; gap: 24px; }
+  .gk-resim { max-width: 460px; margin: 0 auto; }
 }

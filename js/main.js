@@ -191,6 +191,22 @@
     $("takim-ozet").appendChild(d);
   });
 
+  /* Gol kralı */
+  (function () {
+    var G = K.golKrali;
+    if (!G) { $("gol-krali").hidden = true; return; }
+    $("gk-baslik").textContent = G.baslik;
+    $("gk-resim").src = G.resim;
+    $("gk-resim").alt = G.resimAciklama;
+    $("gk-forma").textContent = String(G.forma);
+    $("gk-ad").textContent = G.ad;
+    $("gk-unvan").textContent = G.unvan;
+    G.rakamlar.forEach(function (r) {
+      var d = el("div"); d.appendChild(el("dt", "", r.etiket)); d.appendChild(el("dd", "", r.deger));
+      $("gk-rakamlar").appendChild(d);
+    });
+  })();
+
   /* Kadro: liste boşsa bölüm gizli kalır */
   if (K.kadro.length) {
     $("kadro-bolum").hidden = false;
