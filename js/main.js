@@ -244,6 +244,22 @@
     });
   })();
 
+  /* Instagram profil yerleştirmesi. Instagram'ın embed.js dosyası blockquote'u profil
+     önizlemesine çevirir; yüklenemezse içindeki bağlantı görünür kalır. */
+  (function () {
+    disBaglanti($("ig-dugme"), K.instagram);
+    var bq = el("blockquote", "instagram-media");
+    bq.setAttribute("data-instgrm-permalink", K.instagram);
+    bq.setAttribute("data-instgrm-version", "14");
+    var a = el("a", "", "Instagram'da " + K.instagramAd + " profilini görüntüle");
+    disBaglanti(a, K.instagram);
+    bq.appendChild(a);
+    $("ig-ic").appendChild(bq);
+    var s = document.createElement("script");
+    s.async = true; s.src = "https://www.instagram.com/embed.js";
+    document.body.appendChild(s);
+  })();
+
   /* Takım özeti: tablodaki kendi satırımızdan hesaplanır */
   var biz = tablo.filter(function (t) { return bizMi(t.takim); })[0];
   var sira = tablo.indexOf(biz) + 1;

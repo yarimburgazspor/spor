@@ -344,3 +344,8 @@ form .dugme { justify-self: start; }
   .sponsorlar li { width: calc(50% - 6px); height: 104px; }
   .sponsorlar img { max-height: 82px; }
 }
+
+/* Instagram yerleştirmesi */
+.ig-ic { padding: 22px; display: grid; justify-items: center; }
+.ig-ic .instagram-media { margin: 0 auto !important; max-width: 540px; width: 100%; }
+.ig-ic blockquote:not([class*="rendered"]) { border: 1px solid var(--cizgi); border-radius: 3px; padding: 22px; text-align: center; background: var(--serit); }
