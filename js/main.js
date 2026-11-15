@@ -22,16 +22,10 @@
   $("sayfa-baslik").textContent = K.ad;
   $("marka-ad").textContent = K.kisaAd;
   $("marka-alt").textContent = K.kurulus + " · " + K.renkler;
-  $("alt-ad").textContent = K.ad + ", " + K.kurulus + " yılında kuruldu. Renkleri " + K.renkler.toLowerCase().replace(" - ", "-") + "." + (K.ilce ? " " + K.ilce + "." : "");
+  $("alt-ad").textContent = K.kurulus + " yılında " + (K.ilce ? K.ilce.split(" / ")[0] + "'de " : "") + "kurulan kulübümüz, " + K.renkler.toLowerCase().replace(" - ", "-") + " renkleriyle gençleri sporla buluşturuyor.";
   $("alt-yazi").textContent = "© " + new Date().getFullYear() + " " + K.ad + ". Tüm hakları saklıdır.";
   $("alt-marka-ad").textContent = K.ad;
   $("alt-marka-alt").textContent = K.kurulus + " · " + K.renkler;
-  disBaglanti($("alt-ig"), K.instagram);
-  $("alt-ig-ad").textContent = K.instagramAd;
-  (K.kulupBilgi || []).filter(function (b) { return b.etiket !== "Adres" && b.etiket !== "Renkler"; }).forEach(function (b) {
-    var d = el("div"); d.appendChild(el("dt", "", b.etiket)); d.appendChild(el("dd", "", b.deger));
-    $("alt-kunye").appendChild(d);
-  });
   if (K.tasarim) {
     $("tasarim").appendChild(document.createTextNode(K.tasarim.onEk + " "));
     var ta = el("a", "", K.tasarim.ad); disBaglanti(ta, K.tasarim.url);
@@ -364,25 +358,46 @@
     var d = el("div"); d.appendChild(el("dt", "", c[0])); d.appendChild(el("dd", "", c[1])); $("kunye").appendChild(d);
   });
 
-  /* İletişim: boş satırlar atlanır */
-  if (K.iletisim.adres) $("iletisim-liste").appendChild(el("li", "", K.iletisim.adres));
-  if (K.iletisim.telefon) {
-    var tl = el("li"), ta2 = el("a", "", "Telefon: " + K.iletisim.telefon);
-    ta2.href = "tel:+" + (K.whatsapp || K.iletisim.telefon.replace(/\D/g, ""));
-    tl.appendChild(ta2); $("iletisim-liste").appendChild(tl);
-  }
-  if (K.whatsapp) {
-    var wl = el("li"), wa = el("a", "", "WhatsApp'tan yazın");
-    disBaglanti(wa, "https://wa.me/" + K.whatsapp);
-    wl.appendChild(wa); $("iletisim-liste").appendChild(wl);
-    $("f-gonder").textContent = "WhatsApp ile gönder";
-  }
-  [K.iletisim.eposta, K.iletisim.saatler].forEach(function (s) {
-    if (s) $("iletisim-liste").appendChild(el("li", "", s));
-  });
-  var ig = el("li"), iga = el("a", "", "Instagram: " + K.instagramAd);
-  disBaglanti(iga, K.instagram); ig.appendChild(iga);
-  $("iletisim-liste").appendChild(ig);
+  /* İletişim (alt bilgi): simgeli satırlar ve sosyal düğmeler. Boş bilgiler atlanır. */
+  (function () {
+    var SIMGE = {
+      adres: "M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.500C19 14.800 12 21 12 21zm0-8.500a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
+      telefon: "M6.500 3h3l1.500 4.500-2 1.500a12 12 0 0 0 6 6l1.500-2 4.500 1.500v3A2.500 2.500 0 0 1 18.500 20 15.500 15.500 0 0 1 4 5.500 2.500 2.500 0 0 1 6.500 3z",
+      whatsapp: "M12 3a9 9 0 0 0-7.700 13.600L3 21l4.500-1.200A9 9 0 1 0 12 3zm-3 5.500c.300 2.500 2 4.500 4.500 5.500l1.500-1.500 2 1c-.300 1.500-1.500 2-3 2-3.500-.500-6.500-3.500-7-7 0-1.500.500-2.700 2-3l1 2z",
+      instagram: "M8 3h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5zm4 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm5.400-1.400a1 1 0 1 0 0 2 1 1 0 0 0 0-2z",
+      saat: "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 4v5l3.500 2",
+      eposta: "M3 6h18v12H3zm0 0 9 7 9-7"
+    };
+    function simge(ad) {
+      var ns = "http://www.w3.org/2000/svg";
+      var svg = document.createElementNS(ns, "svg"); svg.setAttribute("viewBox", "0 0 24 24"); svg.setAttribute("aria-hidden", "true");
+      var yol = document.createElementNS(ns, "path"); yol.setAttribute("d", SIMGE[ad]); svg.appendChild(yol);
+      return svg;
+    }
+    function satir(ad, yazi, adres, dis) {
+      var li = el("li"); li.appendChild(simge(ad));
+      if (adres) { var a = el("a", "", yazi); if (dis) disBaglanti(a, adres); else a.href = adres; li.appendChild(a); }
+      else li.appendChild(el("span", "", yazi));
+      $("iletisim-liste").appendChild(li);
+    }
+    function sosyal(ad, etiket, adres, dis) {
+      var a = el("a"); a.setAttribute("aria-label", etiket); a.appendChild(simge(ad));
+      if (dis) disBaglanti(a, adres); else a.href = adres;
+      $("alt-sosyal").appendChild(a);
+    }
+    var I = K.iletisim, tel = I.telefon ? "tel:+" + (K.whatsapp || I.telefon.replace(/\D/g, "")) : "";
+    if (I.adres) satir("adres", I.adres);
+    if (I.telefon) satir("telefon", I.telefon, tel);
+    if (K.whatsapp) satir("whatsapp", "WhatsApp'tan yazın", "https://wa.me/" + K.whatsapp, true);
+    if (I.eposta) satir("eposta", I.eposta, "mailto:" + I.eposta);
+    satir("instagram", K.instagramAd, K.instagram, true);
+    if (I.saatler) satir("saat", I.saatler);
+
+    sosyal("instagram", "Instagram: " + K.instagramAd, K.instagram, true);
+    if (K.whatsapp) sosyal("whatsapp", "WhatsApp'tan yazın", "https://wa.me/" + K.whatsapp, true);
+    if (I.telefon) sosyal("telefon", "Telefon: " + I.telefon, tel);
+    if (K.whatsapp) $("f-gonder").textContent = "WhatsApp ile gönder";
+  })();
 
   /* Başvuru formu */
   var form = $("basvuru"), durum = $("form-durum"), gonder = $("f-gonder");
